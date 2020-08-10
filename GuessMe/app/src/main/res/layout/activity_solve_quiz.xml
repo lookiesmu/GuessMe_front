@@ -12,7 +12,8 @@
         android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="650dp"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="0dp">
 
         <ImageView
             android:id="@+id/iv_main_logo"
@@ -44,6 +45,8 @@
             android:hint="Search"
             android:layout_width="300dp"
             android:layout_height="60dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_chainStyle="packed"
             android:background="@drawable/edit_round"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_chainStyle="packed"
@@ -56,6 +59,7 @@
             android:id="@+id/btn_input"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:src="@drawable/imgbtn"
             android:background="@color/colorPrimary"
             android:text="ENTER"
             android:textColor="#FFFFFF"
