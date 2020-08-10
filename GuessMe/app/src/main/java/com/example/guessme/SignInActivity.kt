@@ -1,4 +1,4 @@
 package com.example.guessme
 
-class SolveQiuz {
+class SignInActivity {
 }

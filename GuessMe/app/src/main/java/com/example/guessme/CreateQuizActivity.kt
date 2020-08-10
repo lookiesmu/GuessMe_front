@@ -1,4 +1,4 @@
 package com.example.guessme
 
-class ReadRank {
+class CreateQuizActivity {
 }

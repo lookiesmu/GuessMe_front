@@ -1,4 +1,5 @@
 package com.example.guessme
 
-class Mypage {
+class UpdateQuizActivity{
+
 }
