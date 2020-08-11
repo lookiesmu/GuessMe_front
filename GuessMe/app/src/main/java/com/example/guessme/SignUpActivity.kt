@@ -125,7 +125,7 @@ class SignUpActivity : AppCompatActivity() {
 
 
     //Activity 클릭 리스너
-    fun signup_Click_Listener(view: View) {
+    fun Signup_Click_Listener(view: View) {
         when (view.id) {
             R.id.su_duplecheck -> {
                 val id = su_et_nickname.text.toString()
