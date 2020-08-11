@@ -1,14 +1,29 @@
 package com.example.guessme
 
+
 import android.content.Context
 import android.util.Log
 import okhttp3.*
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.IOException
+import java.util.concurrent.TimeUnit
 
 class Okhttp() {
     var context : Context? = null
     val client : OkHttpClient = OkHttpClient()
-    lateinit var response: Response
+    var token : String? = null
+    init {
+        client.newBuilder()
+            .connectTimeout(5, TimeUnit.SECONDS)
+            .readTimeout(5,TimeUnit.SECONDS)
+            .writeTimeout(5,TimeUnit.SECONDS)
+            .build()
+    }
+    constructor(context : Context) : this(){
+        this.context = context
+        token = User_Control(context).get_token()
+    }
 
     fun GET(url: String):String{
         try {
@@ -16,8 +31,11 @@ class Okhttp() {
                 .url(url)
                 .get()
             val request = builder.build()
-            response = client.newCall(request).execute()
-            return response.body()?.string()!!
+            if(!token.isNullOrEmpty())
+                builder.header("Authorization",token!!)
+
+            var response : Response = client.newCall(request).execute()
+            return response.body!!.string()
         }catch (e: IOException){
             return e.toString()
         }
@@ -27,10 +45,14 @@ class Okhttp() {
         try {
             val builder= Request.Builder()
                 .url(url)
-                .post(RequestBody.create(MediaType.parse("application/json"), jsonbody))
+                .post(jsonbody.toRequestBody("application/json".toMediaTypeOrNull()))
+            if(!token.isNullOrEmpty())
+                builder.header("Authorization",token!!)
             val request = builder.build()
-            response = client.newCall(request).execute()
-            return response.body()?.string()!!
+            var response : Response = client.newCall(request).execute()
+            if(!response.header("Authorization").isNullOrEmpty())
+                User_Control(context!!).set_token(response.header("Authorization").toString())
+            return response.body?.string()!!
         }catch (e: IOException){
             return e.toString()
         }
@@ -40,12 +62,14 @@ class Okhttp() {
         try {
             val builder= Request.Builder()
                 .url(url)
-                .delete(RequestBody.create(MediaType.parse("application/json"), jsonbody))
+                .delete(jsonbody.toRequestBody("application/json".toMediaTypeOrNull()))
             Log.d("Okhttp",jsonbody)
+            if(!token.isNullOrEmpty())
+                builder.header("Authorization",token!!)
 
             val request = builder.build()
-            response = client.newCall(request).execute()
-            return response.body()?.string()!!
+            var response : Response = client.newCall(request).execute()
+            return response.body?.string()!!
         }catch (e: IOException){
             return e.toString()
         }
@@ -55,11 +79,13 @@ class Okhttp() {
         try {
             val builder= Request.Builder()
                 .url(url)
-                .put(RequestBody.create(MediaType.parse("application/json"), jsonbody))
+                .put(jsonbody.toRequestBody("application/json".toMediaTypeOrNull()))
+            if(!token.isNullOrEmpty())
+                builder.header("Authorization",token!!)
 
             val request = builder.build()
-            response = client.newCall(request).execute()
-            return response.body()?.string()!!
+            var response : Response = client.newCall(request).execute()
+            return response.body?.string()!!
         }catch (e: IOException){
             return e.toString()
         }

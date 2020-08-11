@@ -11,4 +11,6 @@
     <string name="login_failed">"Login failed"</string>
     <string name="server_url"></string>
     <string name="signin"></string>
+    <string name="checkid"></string>
+    <string name="signup"></string>
 </resources>
