@@ -8,6 +8,7 @@
     <color name="colorSignUp">#c4a7a4</color>
     <color name="colorNotActive">#eaeeec</color>
     <color name="colorNotActiveDark">#999999</color>
+    <color name="colorMainBackground">#527394</color>
 
 
 </resources>
