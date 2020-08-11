@@ -59,7 +59,7 @@
             android:textSize="15dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="골뱅이줄괄호 한적 있습니꽈?"
+            android:text="골뱅이줄괄호 해본적이 있습니꽈?"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent">
