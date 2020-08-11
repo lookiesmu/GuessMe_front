@@ -1,101 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".SolveQiuzActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/content"
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/bg_top"
         android:layout_width="match_parent"
-        android:layout_height="650dp"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="vertical"
+        android:background="@drawable/bg_top_real">
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
-        <ImageView
-            android:id="@+id/iv_main_logo"
-            android:src="@drawable/img_title_dark"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/tv_input_nickname"/>
+    <!-- @{class.변수}/ 아래 있을 수록 우선순위 높음 -->
+    <TextView
+        android:id="@+id/tv_make_quiz"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.3"
+        app:layout_constraintBottom_toTopOf="@+id/tv_description"
+        app:layout_constraintVertical_chainStyle="packed"
+        android:text="이땡님 퀴즈를 풀어보세요!"
+        android:textColor="#FFFFFF"
+        android:textSize="25dp"
+        android:gravity="center"
+        android:textStyle="bold"></TextView>
+
+    <TextView
+        android:id="@+id/tv_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/tv_make_quiz"
+        app:layout_constraintBottom_toBottomOf="@+id/bg_top"
+        android:text="퀴즈를 풀고, 높은 점수를 받아서\n 친구와의 우정을 다져보세요!"
+        android:gravity="center"
+        android:textColor="#FFFFFF"
+        android:textSize="15dp"
+        >
+    </TextView>
+
+
+    <!--    QUIZ 1      -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/quiz1"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/bg_top">
 
         <TextView
-            android:id="@+id/tv_input_nickname"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="풀고 싶은 퀴즈 주인의 닉네임을 입력하세요."
-            android:textColor="@color/colorPrimary"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/et_nickname"
-            app:layout_constraintLeft_toLeftOf="@id/et_nickname"
-            app:layout_constraintRight_toRightOf="@id/et_nickname"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.99"
-            android:textSize="15dp"/>
-
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/et_nickname"
+            android:id="@+id/tv_quiz1"
             android:padding="10dp"
-            android:hint="Search"
-            android:layout_width="300dp"
-            android:layout_height="60dp"
-            android:background="@drawable/edit_round"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            android:layout_marginRight="3dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/btn_input"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/btn_input"
+            android:textSize="15dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            android:text="ENTER"
-            android:textColor="#FFFFFF"
+            android:text="골뱅이줄괄호 한적 있습니꽈?"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@+id/et_nickname"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintLeft_toLeftOf="parent">
+        </TextView>
+
+
+        <ImageButton
+            android:id="@+id/btn_yes1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_no1"
+            app:layout_constraintRight_toLefttOf="@+id/btn_no1"
+            android:padding="15dp"
+            android:background="#000FFFFFF"
+            android:src="@drawable/img_o">
+
+        </ImageButton>
+
+        <ImageButton
+            android:id="@+id/btn_no1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/btn_yes1"
+            app:layout_constraintHorizontal_bias="1"
+            android:padding="15dp"
+            android:src="@drawable/img_x_not"
+            android:background="#000FFFFFF">
+        </ImageButton>
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+    <!--    QUIZ 2      -->
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/action_bar"
+        android:id="@+id/quiz2"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="70dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/quiz1">
 
+        <TextView
+            android:id="@+id/tv_quiz2"
+            android:padding="10dp"
+            android:textSize="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="골뱅이줄괄호 한적 있습니꽈?"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent">
+        </TextView>
 
 
         <ImageButton
-            android:id="@+id/btn_solve_quiz"
+            android:id="@+id/btn_yes2"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/btn_mypage"
-            android:src="@drawable/btn_quiz"
-            android:background="#00FFFFFF"/>
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_no2"
+            app:layout_constraintRight_toLefttOf="@+id/btn_no2"
+            android:padding="15dp"
+            android:background="#000FFFFFF"
+            android:src="@drawable/img_o">
+
+        </ImageButton>
 
         <ImageButton
-            android:id="@+id/btn_mypage"
+            android:id="@+id/btn_no2"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintLeft_toRightOf="@+id/btn_solve_quiz"
-            android:src="@drawable/btn_mypage"
-            android:background="#00FFFFFF"/>
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/btn_yes2"
+            app:layout_constraintHorizontal_bias="1"
+            android:padding="15dp"
+            android:src="@drawable/img_x_not"
+            android:background="#000FFFFFF">
+        </ImageButton>
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
