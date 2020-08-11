@@ -3,7 +3,7 @@ package com.example.guessme
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 
-class ReadRankActivity : AppCompatActivity() {
+class SolveQuizActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
