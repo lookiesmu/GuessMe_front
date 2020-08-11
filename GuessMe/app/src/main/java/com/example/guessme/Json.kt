@@ -8,13 +8,13 @@ class Json() {
 
     fun login(nickname : String, pw : String) : String{
         jsonObject.put("nickname",nickname)
-        jsonObject.put("pw",pw)
+        jsonObject.put("password",pw)
         return jsonObject.toString()
     }
 
     fun signup(user : User?, pw : String) : String{
         jsonObject.put("ninkname", user!!.nickname)
-        jsonObject.put("pw",pw)
+        jsonObject.put("password",pw)
         return jsonObject.toString()
     }
     fun isJson(str : String):Boolean{

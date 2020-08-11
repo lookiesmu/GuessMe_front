@@ -46,7 +46,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#00FFFFFF"
-        android:src="@drawable/btn_mypage_"
+        android:src="@drawable/btn_mypage_act"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/btn_solve_quiz"
         app:layout_constraintRight_toRightOf="parent"
