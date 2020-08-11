@@ -76,7 +76,7 @@
             android:padding="15dp"
             android:background="#000FFFFFF"
             android:src="@drawable/img_o">
-            
+
         </ImageButton>
 
         <ImageButton
