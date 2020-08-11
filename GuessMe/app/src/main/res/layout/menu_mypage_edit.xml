@@ -20,11 +20,7 @@
     android:layout_height="50dp"
     android:layout_width="match_parent">
 
-    <item android:id="@+id/filter_zone"
-        android:icon="@drawable/menu_edit"
-
-
-        app:showAsAction="always"
-        android:title="@string/menu_filter_by_grow_zone"/>
+    <item android:id="@+id/delete_quiz"
+        background/>
 
 </menu>
