@@ -15,9 +15,10 @@ class SignInActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
-        Login_Control().edit_init()
+        Signin_Control().edit_init()
     }
-    inner class Login_Control {
+
+    inner class Signin_Control {
         fun edit_init(){
             si_et_nickname.addTextChangedListener(EditListener())
             si_et_password.addTextChangedListener(EditListener())
@@ -42,6 +43,7 @@ class SignInActivity : AppCompatActivity() {
             asynctask().execute(url,id,pw)
         }
     }
+
     inner class asynctask : AsyncTask<String, Void, String>(){
         override fun doInBackground(vararg params: String): String {
             val url = params[0]
@@ -57,7 +59,6 @@ class SignInActivity : AppCompatActivity() {
                 return
             }
             Log.d("SignIn_Activity",response)
-            //response 값이 json문이 아니면 통신 오류 메세지 출력
             if(!Json().isJson(response)){
                 Toast.makeText(applicationContext,"네트워크 통신 오류",Toast.LENGTH_SHORT).show()
                 return
@@ -74,12 +75,12 @@ class SignInActivity : AppCompatActivity() {
             finish()
         }
     }
-    //Activity 클릭 리스너
+
     fun Signin_Click_Listener(view :View){
         when(view.id){
-            R.id.si_et_nickname ->{
-                if(Login_Control().edit_check()) {
-                    Login_Control().POST_login(si_et_nickname.text.toString(), si_et_password.text.toString())
+            R.id.si_btn ->{
+                if(Signin_Control().edit_check()) {
+                    Signin_Control().POST_login(si_et_nickname.text.toString(), si_et_password.text.toString())
                 }
             }
             R.id.tv_signup ->startActivity(Intent(applicationContext, SignUpActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP))
