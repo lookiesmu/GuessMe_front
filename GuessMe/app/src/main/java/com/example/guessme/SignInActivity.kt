@@ -75,7 +75,7 @@ class SignInActivity : AppCompatActivity() {
         }
     }
     //Activity 클릭 리스너
-    fun login_Click_Listener(view :View){
+    fun Signin_Click_Listener(view :View){
         when(view.id){
             R.id.si_et_nickname ->{
                 if(Login_Control().edit_check()) {
@@ -88,9 +88,9 @@ class SignInActivity : AppCompatActivity() {
     inner class EditListener : TextWatcher {
         override fun afterTextChanged(s: Editable?) {
             if(!s.isNullOrEmpty())
-                btn_signin.isEnabled = !si_et_nickname.text.isNullOrEmpty() && !si_et_password.text.isNullOrEmpty()
+                si_btn.isEnabled = !si_et_nickname.text.isNullOrEmpty() && !si_et_password.text.isNullOrEmpty()
             else
-                btn_signin.isEnabled = false
+                si_btn.isEnabled = false
         }
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {       }
