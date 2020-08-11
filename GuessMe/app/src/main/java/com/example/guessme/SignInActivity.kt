@@ -70,7 +70,7 @@ class SignInActivity : AppCompatActivity() {
                 return
             }
             User_Control(applicationContext).set_user(user)
-            startActivity(Intent(applicationContext, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP))
+            startActivity(Intent(applicationContext, SolveQuizActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP))
             finish()
         }
     }
