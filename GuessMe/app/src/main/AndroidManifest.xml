@@ -9,18 +9,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".data.Main2Activity"></activity>
-        <activity android:name=".Main2Activity" />
-        <activity
-            android:name=".ui.login.SignInActivity"
-            android:label="@string/title_activity_sign_in" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".SignInActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".CreateQuizActivity"></activity>
+        <activity android:name=".MypageActivity"></activity>
+        <activity android:name=".ReadRankActivity"></activity>
+        <activity android:name=".SignUpActivity"></activity>
+        <activity android:name=".SolveQuizActivity"></activity>
+        <activity android:name=".UpdateQuizActivity"></activity>
     </application>
 
 </manifest>

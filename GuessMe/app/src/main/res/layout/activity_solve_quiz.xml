@@ -53,6 +53,7 @@
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@id/bg_top">
 
+
         <TextView
             android:id="@+id/tv_quiz1"
             android:padding="10dp"
@@ -75,7 +76,7 @@
             android:padding="15dp"
             android:background="#000FFFFFF"
             android:src="@drawable/img_o">
-
+            
         </ImageButton>
 
         <ImageButton
@@ -89,6 +90,7 @@
             android:src="@drawable/img_x_not"
             android:background="#000FFFFFF">
         </ImageButton>
+
 
 
 
