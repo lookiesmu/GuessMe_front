@@ -1,6 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <FrameLayout
+        android:id="@+id/frameLayout_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_top_real"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tv_cq_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="이땡님의 퀴즈를 만들어 보세요!"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:textColor="#FFFFFF"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/frameLayout_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginBottom="100dp"
+        />
+
+    <TextView
+        android:id="@+id/tv_cq_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:text="랜덤으로 5가지의 질문이 뽑혔어요!\n 본인만의 답변을 체크하고 친구들에게 공유하세요~!"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/frameLayout_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_cq_title" />
+
+    <ImageButton
+        android:id="@+id/btn_create_quiz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:clickable="true"
+        android:src="@drawable/btn_create_real"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <FrameLayout
+        android:id="@+id/frameLayout_rv"
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+        android:layout_marginBottom="30dp"
+        app:layout_constraintBottom_toTopOf="@id/btn_create_quiz"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout_title">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_create_quiz"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:clipToPadding="false"
+            android:paddingStart="20dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="20dp"
+            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+            tools:listitem="@layout/list_item_create_quiz"
+            tools:context="M"
+            />
+    </FrameLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
