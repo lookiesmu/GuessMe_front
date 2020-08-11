@@ -9,8 +9,8 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
-    <string name="server_url"></string>
-    <string name="signin"></string>
+    <string name="server_url">http://ec2-13-209-122-152.ap-northeast-2.compute.amazonaws.com:8080</string>
+    <string name="signin">/login</string>
+    <string name="signup">/users</string>
     <string name="checkid"></string>
-    <string name="signup"></string>
 </resources>
