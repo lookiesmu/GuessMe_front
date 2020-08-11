@@ -1,4 +1,4 @@
-package com.example.guessme
+package com.example.guessme.data
 
 
 import org.json.JSONObject
