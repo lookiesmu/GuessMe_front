@@ -16,8 +16,8 @@ class Json() {
         return jsonObject.toString()
     }
 
-    fun signup(user : User?, pw : String) : String{
-        jsonObject.put("ninkname", user!!.nickname)
+    fun signup(nickname: String, pw : String) : String{
+        jsonObject.put("nickname", nickname)
         jsonObject.put("password",pw)
         return jsonObject.toString()
     }
