@@ -11,7 +11,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.guessme.api.Json
 import com.example.guessme.api.Okhttp
+import com.example.guessme.data.Quiz
 import kotlinx.android.synthetic.main.activity_search_quiz.*
+import org.json.JSONArray
+import org.json.JSONObject
 
 class SearchQuizActivity : AppCompatActivity() {
 
@@ -33,14 +36,13 @@ class SearchQuizActivity : AppCompatActivity() {
                 Toast.makeText(applicationContext, "닉네임을 입력해주세요.", Toast.LENGTH_LONG).show()
                 return false
             }
-            else
-                Log.d("에딧체크안됨", sq_et_nickname.text.toString())
+
             return true
 
         }
 
         fun GET_QUIZ(nickname : String){
-            val url = getString(R.string.server_url) + "/quizzes/" + {nickname}
+            val url = getString(R.string.server_url) + "/quizzes/" + nickname
             asynctask().execute(url)
         }
     }
@@ -49,9 +51,13 @@ class SearchQuizActivity : AppCompatActivity() {
         override fun doInBackground(vararg params: String): String {
             val url = params[0]
             Log.d("두인백그라운드",url)
+            val str = Okhttp(applicationContext).GET(url)
+            Log.d("받아왔니?",str)
             return Okhttp(applicationContext).GET(url)
         }
-        override fun onPostExecute(response: String) {
+
+
+        override fun onPostExecute(response: String?) {
             //넘어온 값이 없을 때 로그 찍고 리턴
             if(response.isNullOrEmpty()) {
                 Toast.makeText(applicationContext,"Search_activity", Toast.LENGTH_SHORT).show()
@@ -64,14 +70,14 @@ class SearchQuizActivity : AppCompatActivity() {
                 Toast.makeText(applicationContext,"네트워크 통신 오류",Toast.LENGTH_SHORT).show()
                 return
             }
-
+            Toast.makeText(applicationContext,"퀴즈를 찾아왔어요!",Toast.LENGTH_SHORT).show()
 //            val jsonAry = JSONArray(response)
-////            val solve_quiz_list: ArrayList<Quiz> = arrayListOf() //intent 시 넘겨주기 위해 전역 변수로 선언
-//            for (i in 0 until jsonAry.length()) {
-//                val jsonObj: JSONObject = jsonAry.getJSONObject(i)
-//                solve_quiz_list.add(Quiz(jsonObj.getInt("quizid"),jsonObj.getString("question"), jsonObj.getInt("answer")))
-//            }
-////            rv_solve_quiz.adapter = Res_adapter(@SolveQuizActivity, solve_quiz_list)
+//            val solve_quiz_list: ArrayList<Quiz> = arrayListOf() //intent 시 넘겨주기 위해 전역 변수로 선언
+            /*for (i in 0 until jsonAry.length()) {
+                val jsonObj: JSONObject = jsonAry.getJSONObject(i)
+                solve_quiz_list.add(Quiz(jsonObj.getInt("quizid"),jsonObj.getString("question"), jsonObj.getInt("answer")))
+            }*/
+//            rv_solve_quiz.adapter = Res_adapter(@SolveQuizActivity, solve_quiz_list)
 
         }
     }
