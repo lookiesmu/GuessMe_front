@@ -21,6 +21,7 @@
         <activity android:name=".ReadRankActivity"></activity>
         <activity android:name=".SignUpActivity"></activity>
         <activity android:name=".SolveQuizActivity"></activity>
+        <activity android:name=".SearchQuizActivity"></activity>
         <activity android:name=".UpdateQuizActivity"></activity>
     </application>
 
