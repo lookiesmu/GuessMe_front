@@ -48,7 +48,7 @@ class SignUpActivity : AppCompatActivity() {
         }
 
         fun GET_Check(id: String) {
-            val url = getString(R.string.server_url) + getString(R.string.checkid) + id
+            val url = getString(R.string.server_url) + getString(R.string.checkid)+ id
             asynctask().execute("0", url)
         }
 
