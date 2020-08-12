@@ -9,7 +9,7 @@
     android:elevation="8dp">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tv_content_cq"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="술 마시고 지하철 종점 찍은 적이 있다."

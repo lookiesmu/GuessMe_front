@@ -45,6 +45,7 @@
 
     <ImageButton
         android:id="@+id/btn_solve_quiz_mp"
+        android:onClick="Mypage_Click_Listener"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#00FFFFFF"
