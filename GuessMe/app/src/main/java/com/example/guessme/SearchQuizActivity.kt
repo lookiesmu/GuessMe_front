@@ -15,6 +15,8 @@ import com.example.guessme.data.Quiz
 import com.example.guessme.data.User
 import kotlinx.android.synthetic.main.activity_search_quiz.*
 import kotlinx.android.synthetic.main.activity_sign_in.*
+import org.json.JSONArray
+import org.json.JSONObject
 
 class SearchQuizActivity : AppCompatActivity() {
 
@@ -30,7 +32,7 @@ class SearchQuizActivity : AppCompatActivity() {
         }
     }
 
-    inner class SearchQuiz_Control {
+    inner class SearchQuiz_Control() {
         fun edit_init(){
             sq_et_nickname.addTextChangedListener(EditListener())
         }
@@ -40,13 +42,11 @@ class SearchQuizActivity : AppCompatActivity() {
                 Toast.makeText(applicationContext, "닉네임을 입력해주세요.", Toast.LENGTH_LONG).show()
                 return false
             }
-
             return true
         }
         fun GET_QUIZ(nickname : String){
-//            왜 있는 지 물어보기
-            val url = getString(R.string.server_url) + getString(R.string.signin)
-            asynctask().execute(url,nickname)
+            val url = getString(R.string.server_url) + "/quizzes/" + nickname
+            asynctask().execute(url)
         }
     }
 
@@ -60,26 +60,23 @@ class SearchQuizActivity : AppCompatActivity() {
             //넘어온 값이 없을 때 로그 찍고 리턴
             if(response.isNullOrEmpty()) {
                 Toast.makeText(applicationContext,"서버 문제 발생", Toast.LENGTH_SHORT).show()
-                Log.d("SignIn_Activity", "null in")
+                Log.d("Search_Activity", "null in")
                 return
             }
-            Log.d("SignIn_Activity",response)
+            Log.d("Search_Activity",response)
             /*if(!Json().isJson(response)){
                 Log.d("network", response)
                 Toast.makeText(applicationContext,"네트워크 통신 오류",Toast.LENGTH_SHORT).show()
                 return
             }*/
-            val user = User(
-                si_et_nickname.text.toString()
-            )
-            if(user.nickname == "null"){
-                Toast.makeText(applicationContext,"아이디가 존재하지 않거나 비밀번호가 틀렸습니다", Toast.LENGTH_SHORT).show()
-                return
+            val jsonAry = JSONArray(response)
+            val solve_quiz_list: Array<Quiz> = arrayOf()
+            for (i in 0 until jsonAry.length()) {
+                val jsonObj: JSONObject = jsonAry.getJSONObject(i)
+                solve_quiz_list.add(Quiz(jsonObj.getString("question"), jsonObj.getInt("answer"))
             }
-            User_Control(applicationContext).set_user(user)
-/*            startActivity(Intent(applicationContext, SolveQuizActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP))*/
-            Toast.makeText(applicationContext,"로그인완료", Toast.LENGTH_SHORT).show()
-            finish()
+            reslist_res_RecView.adapter = Res_adapter(this@ResList_Activity, resList)
+
         }
     }
 
