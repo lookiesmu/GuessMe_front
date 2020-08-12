@@ -87,7 +87,7 @@ class SearchQuizActivity : AppCompatActivity() {
                     SearchQuiz_Control().GET_QUIZ(sq_et_nickname.text.toString())
 
                     val intent = Intent(this, SolveQuizActivity::class.java)
-                    intent.putExtra("solveQuizList",solve_quiz_list as Serializable) //list를 넘겨주기 위해
+                    intent.putExtra("solveQuizList",solve_quiz_list) //list를 넘겨주기 위해
                     startActivity(intent)
                 }
             }
