@@ -30,14 +30,30 @@ class CreateQuizAdapter(private val quizList: ArrayList<Quiz>) :
                 qContent?.setText(quiz.content)
             }
 
+            // O 버튼 클릭 리스너
             iv_yes.setOnClickListener{
-                //answer=1로 바꾸기
-                iv_yes.setImageResource(R.drawable.img_o_act)
-            }
-            iv_no.setOnClickListener{
-                // answer=0
-                iv_no.setImageResource(R.drawable.img_x)
+                //answer=1로 바꾸기(yes활성화)
+                if(quiz.answer == 0){
+                    iv_yes.setImageResource(R.drawable.img_o_act)
+                    iv_no.setImageResource(R.drawable.img_x_not)
+                    quiz.answer = 1
+                } else{     // yes를 비활성화
+                    iv_no.setImageResource(R.drawable.img_o)
+                    quiz.answer = -1
 
+                }
+            }
+            // O 버튼 클릭 리스너
+            iv_no.setOnClickListener{
+                ///answer=0로 바꾸기(no활성화)
+                if(quiz.answer == 1){
+                    iv_no.setImageResource(R.drawable.img_x)
+                    iv_yes.setImageResource(R.drawable.img_o)
+                    quiz.answer = 1
+                } else{     // no 비활성화
+                    iv_no.setImageResource(R.drawable.img_x_not)
+                    quiz.answer = -1
+                }
 
             }
         }
