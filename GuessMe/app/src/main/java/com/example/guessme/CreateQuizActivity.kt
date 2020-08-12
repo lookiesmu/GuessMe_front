@@ -20,7 +20,6 @@ import org.json.JSONObject
 
 class CreateQuizActivity : AppCompatActivity() {
 
-    val quiz_url = BASE_URL + "/quizzes"
     val createQuizList: ArrayList<Quiz> = arrayListOf()
 
     private lateinit var recyclerView: RecyclerView
@@ -31,7 +30,7 @@ class CreateQuizActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_quiz)
-        Log.d("CreateQuiz_Activity","1")
+        //Log.d("CreateQuiz_Activity","1")
 
 
         CreateQuiz_Control().GET_CreateQuiz()
@@ -44,15 +43,16 @@ class CreateQuizActivity : AppCompatActivity() {
     inner class CreateQuiz_Control {
         // 서버로부터 퀴즈 문항 get
         fun GET_CreateQuiz(){
-            Log.d("CreateQuiz_Activity","2")
-
-            asynctask().execute("0", quiz_url)
+            //Log.d("CreateQuiz_Activity","2")
+            val url = getString(R.string.server_url)+"/quizzes"
+            asynctask().execute("0", url)
 
         }
 
         // 퀴즈 생성
         fun POST_CreateQuiz(){
-            asynctask().execute("1", quiz_url, createQuizList.toString())
+            val url = getString(R.string.server_url) + "/quizzes"
+            asynctask().execute("1", url, createQuizList.toString())
         }
 
         // 선택했는지 확인
@@ -67,7 +67,7 @@ class CreateQuizActivity : AppCompatActivity() {
 
         // response rv에 띄우기
         fun show_Quiz(context: Context){
-            Log.d("CreateQuiz_Activity", "6")
+            //Log.d("CreateQuiz_Activity", "6")
             viewManager = LinearLayoutManager(context)
             viewAdapter = CreateQuizAdapter(createQuizList)
 
@@ -118,7 +118,8 @@ class CreateQuizActivity : AppCompatActivity() {
             when (state) {
                 0 -> {
                     Log.d("CreateQuiz_Activity","4")
-                    response = Okhttp().GET(url)
+                    response = Okhttp(applicationContext).GET(url)
+                    Log.d("CreateQuiz_Activity",response)
                 }
                 1 -> {
                      var quizList = params[2]
@@ -134,7 +135,7 @@ class CreateQuizActivity : AppCompatActivity() {
         override fun onPostExecute(response: String) {
             if(response.isNullOrEmpty()) {
                 Toast.makeText(applicationContext,"서버 문제 발생", Toast.LENGTH_SHORT).show()
-                Log.d("CreateQuiz_Activity", "null in")
+                Log.d("CreateQuiz_Activity", "null in"+response)
                 return
             }
             if(!Json().isJson(response)){
@@ -144,13 +145,16 @@ class CreateQuizActivity : AppCompatActivity() {
             }
             //Log.d("CreateQuiz_Activity",response)
 
-            var jsonArr = JSONArray(response)
+            val jsonObj = JSONObject(response)
             when (state) {
                 0 -> {
                     Log.d("CreateQuiz_Activity", "5")
-                    for (i in 0 until jsonArr.length()) {
-                        var jsonObj: JSONObject = jsonArr.getJSONObject(i)
-                        createQuizList.add(Quiz(jsonObj.getInt("quizid"),jsonObj.getString("question"), jsonObj.getInt("answer")))
+                    val json_embedded = jsonObj.getJSONObject("_embedded")
+                    val json_quizList = json_embedded.getJSONArray("quizList")
+                    for (i in 0 until json_quizList.length()) {
+                        var jsonO: JSONObject = json_quizList.getJSONObject(i)
+                        Log.d("CreateQuiz_Activity",jsonO.toString())
+                        createQuizList.add(Quiz(jsonO.getInt("quizId"),jsonO.getString("content"), jsonO.getInt("answer")))
                     }
 
                     // response rv에 띄우기
