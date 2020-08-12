@@ -31,15 +31,15 @@
             android:text="풀고 싶은 퀴즈 주인의 닉네임을 입력하세요."
             android:textColor="@color/colorPrimary"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/et_nickname"
-            app:layout_constraintLeft_toLeftOf="@id/et_nickname"
-            app:layout_constraintRight_toRightOf="@id/et_nickname"
+            app:layout_constraintBottom_toTopOf="@+id/sq_et_nickname"
+            app:layout_constraintLeft_toLeftOf="@id/sq_et_nickname"
+            app:layout_constraintRight_toRightOf="@id/sq_et_nickname"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.99"
             android:textSize="15dp"/>
 
         <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/et_nickname"
+            android:id="@+id/sq_et_nickname"
             android:padding="10dp"
             android:hint="Search"
             android:layout_width="300dp"
@@ -49,18 +49,19 @@
             app:layout_constraintHorizontal_chainStyle="packed"
             android:layout_marginRight="3dp"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/btn_input"
+            app:layout_constraintRight_toLeftOf="@id/btn_search"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/btn_input"
+            android:id="@+id/btn_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
             android:text="ENTER"
+            android:onClick="SearchQuiz_Click_Listener"
             android:textColor="#FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@+id/et_nickname"
+            app:layout_constraintLeft_toRightOf="@+id/sq_et_nickname"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
