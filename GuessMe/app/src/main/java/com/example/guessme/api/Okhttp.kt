@@ -30,12 +30,14 @@ class Okhttp() {
         try {
             val builder= Request.Builder()
                 .url(url)
+//                .addHeader("Content-Type", "application/json")
+//                .addHeader("X-AUTH-TOKEN", "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzIiwicm9sZXMiOltdLCJpYXQiOjE1OTcyNDk2ODgsImV4cCI6MTU5NzI1MzI4OH0.TaLOPZ2o3ec58I9EAGa99_gBkqHjpuboQG6m_6yeC9c")
                 .get()
             if(!token.isNullOrEmpty())
-                builder.header("Authorization", token!!)
+                builder.header("X-AUTH-TOKEN",token!!)
             val request = builder.build()
             var response : Response = client.newCall(request).execute()
-            return response.body()!!.string()
+            return response.body()?.string()!!
         }catch (e: IOException){
             return e.toString()
         }
@@ -47,13 +49,15 @@ class Okhttp() {
                 .url(url)
                 .post(RequestBody.create(MediaType.parse("application/json"), jsonbody))
             if(!token.isNullOrEmpty())
-                builder.header("Authorization",token!!)
+                builder.header("X-AUTH-TOKEN",token!!)
             val request = builder.build()
             response = client.newCall(request).execute()
-            if(!response.header("Authorization").isNullOrEmpty())
+            if(!response.header("X-AUTH-TOKEN").isNullOrEmpty())
                 User_Control(context!!)
-                    .set_token(response.header("Authorization").toString())
+                    .set_token(response.header("X-AUTH-TOKEN").toString())
+            Log.d("network", "network: "+response.header("X-AUTH-TOKEN"))
             return response.body()!!.string()
+
         }catch (e: IOException){
             return e.toString()
         }
@@ -66,7 +70,7 @@ class Okhttp() {
                 .delete(RequestBody.create(MediaType.parse("application/json"), jsonbody))
             Log.d("Okhttp",jsonbody)
             if(!token.isNullOrEmpty())
-                builder.header("Authorization",token!!)
+                builder.header("X-AUTH-TOKEN",token!!)
 
             val request = builder.build()
             var response : Response = client.newCall(request).execute()
@@ -82,7 +86,7 @@ class Okhttp() {
                 .url(url)
                 .put(RequestBody.create(MediaType.parse("application/json"), jsonbody))
             if(!token.isNullOrEmpty())
-                builder.header("Authorization",token!!)
+                builder.header("X-AUTH-TOKEN",token!!)
 
             val request = builder.build()
             var response : Response = client.newCall(request).execute()
