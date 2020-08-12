@@ -1,6 +1,7 @@
-package com.example.guessme.data
+package com.example.guessme.api
 
 
+import com.example.guessme.data.User
 import org.json.JSONObject
 
 class Json() {
@@ -23,4 +24,5 @@ class Json() {
             return true
         return false
     }
+
 }
