@@ -52,9 +52,9 @@ class SignUpActivity : AppCompatActivity() {
             asynctask().execute("0", url)
         }
 
-        fun POST_SignUp(pw: String) {
+        fun POST_SignUp(id: String, pw: String) {
             val url = getString(R.string.server_url) + getString(R.string.signup)
-            asynctask().execute("1", url, pw)
+            asynctask().execute("1", url, id, pw)
         }
 
         fun Dialog_Signup() {
@@ -66,33 +66,6 @@ class SignUpActivity : AppCompatActivity() {
         }
 
     }
-
-    //Activity 클릭 리스너
-    fun Signup_Click_Listener(view: View) {
-        when (view.id) {
-            R.id.su_duplecheck -> {
-                val id = su_et_nickname.text.toString()
-                if (id.isEmpty())
-                    Toast.makeText(applicationContext, "닉네임를 입력해주세요", Toast.LENGTH_SHORT).show()
-                else {
-                    SignUp_Control().GET_Check(id)
-                }
-            }
-            R.id.su_btn -> {
-                if (!checkId) {
-                    Toast.makeText(applicationContext, "중복확인이 필요합니다", Toast.LENGTH_SHORT).show()
-                    return
-                }
-                if (SignUp_Control().edit_check()) {
-                    val id = su_et_password.text.toString()
-                    val pw = su_et_passwordcheck.text.toString()
-                    user = User(id)
-                    SignUp_Control().POST_SignUp(pw)
-                }
-            }
-        }
-    }
-
 
     inner class asynctask : AsyncTask<String, Void, String>() {
         var state: Int = -1 //state == 0 : GET_아이디 중복확인, state == 1 : POST_회원가입
@@ -108,9 +81,12 @@ class SignUpActivity : AppCompatActivity() {
             when (state) {
                 0 -> response = Okhttp().GET(url)
                 1 -> {
-                    val pw = params[2]
+                    val id = params[2]
+                    val pw = params[3]
+                    Log.d("network",url+id+pw)
                     response = Okhttp().POST(url, Json()
-                        .signup(user, pw))
+                        .signup(id, pw))
+                    Log.d("network", response)
                 }
             }
             return response
@@ -141,6 +117,7 @@ class SignUpActivity : AppCompatActivity() {
                 }
                 1 -> {
                     if (jsonObj.getBoolean("success")) {
+                        Toast.makeText(applicationContext, "회원가입 완료", Toast.LENGTH_SHORT)
                         SignUp_Control().Dialog_Signup()
                     } else {
                         Toast.makeText(applicationContext, "회원가입 실패", Toast.LENGTH_SHORT).show()
@@ -148,6 +125,33 @@ class SignUpActivity : AppCompatActivity() {
                 }
             }
             loadingDialog.dismiss()
+        }
+    }
+
+
+    //Activity 클릭 리스너
+    fun Signup_Click_Listener(view: View) {
+        when (view.id) {
+            R.id.su_duplecheck -> {
+                val id = su_et_nickname.text.toString()
+                if (id.isEmpty())
+                    Toast.makeText(applicationContext, "닉네임를 입력해주세요", Toast.LENGTH_SHORT).show()
+                else {
+                    SignUp_Control().GET_Check(id)
+                }
+            }
+            R.id.su_btn -> {
+                if (!checkId) {
+                    Toast.makeText(applicationContext, "중복확인이 필요합니다", Toast.LENGTH_SHORT).show()
+                    return
+                }
+                if (SignUp_Control().edit_check()) {
+                    val id = su_et_nickname.text.toString()
+                    val pw = su_et_password.text.toString()
+                    user = User(id)
+                    SignUp_Control().POST_SignUp(id,pw)
+                }
+            }
         }
     }
 
