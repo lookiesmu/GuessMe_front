@@ -31,10 +31,12 @@ class Okhttp() {
             val builder= Request.Builder()
                 .url(url)
                 .get()
+            Log.d("network", "network: ")
             if(!token.isNullOrEmpty())
                 builder.header("Authorization", token!!)
             val request = builder.build()
             var response : Response = client.newCall(request).execute()
+            Log.d("network", "network: "+response.body()!!.string())
             return response.body()!!.string()
         }catch (e: IOException){
             return e.toString()
@@ -54,6 +56,7 @@ class Okhttp() {
                 User_Control(context!!)
                     .set_token(response.header("Authorization").toString())
             return response.body()!!.string()
+            Log.d("network", "network: "+response.body()!!.string())
         }catch (e: IOException){
             return e.toString()
         }
