@@ -9,7 +9,8 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.guessme.data.Json
+import com.example.guessme.api.Okhttp
+import com.example.guessme.api.Json
 import com.example.guessme.data.User
 import kotlinx.android.synthetic.main.activity_sign_in.*
 
@@ -51,7 +52,8 @@ class SignInActivity : AppCompatActivity() {
             val url = params[0]
             val id = params[1]
             val pw = params[2]
-            return Okhttp(applicationContext).POST(url, Json()
+            return Okhttp(applicationContext)
+                .POST(url, Json()
                 .login(id,pw))
         }
         override fun onPostExecute(response: String) {
