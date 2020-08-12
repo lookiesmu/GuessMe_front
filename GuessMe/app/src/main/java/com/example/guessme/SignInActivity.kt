@@ -77,7 +77,7 @@ class SignInActivity : AppCompatActivity() {
                 return
             }
             User_Control(applicationContext).set_user(user)
-            startActivity(Intent(applicationContext, SolveQuizActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP))
+            startActivity(Intent(applicationContext, SearchQuizActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP))
             Toast.makeText(applicationContext,"로그인완료",Toast.LENGTH_SHORT).show()
             finish()
         }
