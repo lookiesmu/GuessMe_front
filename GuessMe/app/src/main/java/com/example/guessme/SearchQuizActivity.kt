@@ -15,6 +15,7 @@ import com.example.guessme.data.Quiz
 import kotlinx.android.synthetic.main.activity_search_quiz.*
 import org.json.JSONArray
 import org.json.JSONObject
+import java.lang.Exception
 
 class SearchQuizActivity : AppCompatActivity() {
 
@@ -61,22 +62,40 @@ class SearchQuizActivity : AppCompatActivity() {
             //넘어온 값이 없을 때 로그 찍고 리턴
             if(response.isNullOrEmpty()) {
                 Toast.makeText(applicationContext,"Search_activity", Toast.LENGTH_SHORT).show()
-                Log.d("정인 Search_Activity", "null in")
+                Log.d("Search_Activity", "null in")
                 return
             }
-            Log.d("정인2Search_Activity",response)
+            Log.d("Search_Activity",response)
             if(!Json().isJson(response)){
                 Log.d("퀴즈 입력 통신 에러", response)
                 Toast.makeText(applicationContext,"네트워크 통신 오류",Toast.LENGTH_SHORT).show()
                 return
             }
+
+            val jsonObj = JSONObject(response) // 에러여도 여기까진 가능
+
+            try {
+
+                val jsonObj_embedded = jsonObj.getJSONObject("_embedded")
+                val jsonQuizAry = jsonObj_embedded.getJSONArray("quizList")
+
+            }catch (e:Exception){
+
+                Toast.makeText(applicationContext, "존재하지 않는 닉네임 입니다.", Toast.LENGTH_SHORT).show()
+                return
+
+            }
+
+
             Toast.makeText(applicationContext,"퀴즈를 찾아왔어요!",Toast.LENGTH_SHORT).show()
-//            val jsonAry = JSONArray(response)
+
+//            Log.d("정인삼삼삼","json?:"+response)
 //            val solve_quiz_list: ArrayList<Quiz> = arrayListOf() //intent 시 넘겨주기 위해 전역 변수로 선언
-            /*for (i in 0 until jsonAry.length()) {
-                val jsonObj: JSONObject = jsonAry.getJSONObject(i)
-                solve_quiz_list.add(Quiz(jsonObj.getInt("quizid"),jsonObj.getString("question"), jsonObj.getInt("answer")))
-            }*/
+//            Log.d("정인이이이","jsonAry_len:"+ jsonAry.length().toString() )
+//            for (i in 0 until jsonAry.length()) {
+//                val jsonObj: JSONObject = jsonAry.getJSONObject(i)
+//                solve_quiz_list.add(Quiz(jsonObj.getInt("quizid"),jsonObj.getString("question"), jsonObj.getInt("answer")))
+//            }
 //            rv_solve_quiz.adapter = Res_adapter(@SolveQuizActivity, solve_quiz_list)
 
         }
