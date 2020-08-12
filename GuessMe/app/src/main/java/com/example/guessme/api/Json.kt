@@ -28,7 +28,12 @@ class Json() {
             return true
         return false
     }
-
+    fun isnull(str : String):Boolean{
+        str.trim()
+        if(str[2] == 's' || str[3] == 'u')
+            return false
+        return true
+    }
     fun createQuiz(quizList: String): String{
         // string -> QuizList
             // 요 부분 일단 보류
@@ -37,6 +42,7 @@ class Json() {
         var jsonArr = JSONArray(quizList)
         return jsonArr.toString()
     }
+
 
     fun deleteQuiz(): String {
         // 삭제할 때 뭐 보내는지 물어보기!
