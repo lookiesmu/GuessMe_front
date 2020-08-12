@@ -142,7 +142,7 @@ class CreateQuizActivity : AppCompatActivity() {
                 Toast.makeText(applicationContext,"네트워크 통신 오류",Toast.LENGTH_SHORT).show()
                 return
             }
-            Log.d("CreateQuiz_Activity",response)
+            //Log.d("CreateQuiz_Activity",response)
 
             var jsonArr = JSONArray(response)
             when (state) {
