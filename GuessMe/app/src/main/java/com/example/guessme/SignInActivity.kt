@@ -53,6 +53,7 @@ class SignInActivity : AppCompatActivity() {
             val url = params[0]
             val id = params[1]
             val pw = params[2]
+            Log.d("network", "network: "+url+id+pw)
             return Okhttp(applicationContext)
                 .POST(url, Json()
                 .login(id,pw))
@@ -65,18 +66,19 @@ class SignInActivity : AppCompatActivity() {
                 Log.d("SignIn_Activity", "null in")
                 return
             }
+            Log.d("SignIn_Activity",response)
             if(!Json().isJson(response)){
                 Toast.makeText(applicationContext,"네트워크 통신 오류",Toast.LENGTH_SHORT).show()
+                return
+            }
+
+            if(!Json().isnull(response)){
+                Toast.makeText(applicationContext,"아이디가 존재하지 않거나 비밀번호가 틀렸습니다",Toast.LENGTH_SHORT).show()
                 return
             }
             val user = User(
                 si_et_nickname.text.toString()
             )
-            val jsonObj = JSONObject(response)
-            /*if(jsonObj.isNull("success")){
-                Toast.makeText(applicationContext,"아이디가 존재하지 않거나 비밀번호가 틀렸습니다",Toast.LENGTH_SHORT).show()
-                return
-            }*/
             User_Control(applicationContext).set_user(user)
             startActivity(Intent(applicationContext, CreateQuizActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP))
             Toast.makeText(applicationContext,"로그인완료",Toast.LENGTH_SHORT).show()
