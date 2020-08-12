@@ -15,8 +15,10 @@ import com.example.guessme.data.Quiz
 import com.example.guessme.data.User
 import kotlinx.android.synthetic.main.activity_search_quiz.*
 import kotlinx.android.synthetic.main.activity_sign_in.*
+import kotlinx.android.synthetic.main.activity_solve_quiz.*
 import org.json.JSONArray
 import org.json.JSONObject
+import java.io.Serializable
 
 class SearchQuizActivity : AppCompatActivity() {
 
@@ -25,12 +27,9 @@ class SearchQuizActivity : AppCompatActivity() {
         setContentView(R.layout.activity_search_quiz)
         SearchQuiz_Control().edit_init()
 
-        val go_intent = findViewById(R.id.btn_search) as Button
-        go_intent.setOnClickListener {
-            val intent = Intent(this, SolveQuizActivity::class.java)
-            startActivity(intent)
-        }
     }
+
+    val solve_quiz_list: ArrayList<Quiz> = arrayListOf()
 
     inner class SearchQuiz_Control() {
         fun edit_init(){
@@ -43,6 +42,7 @@ class SearchQuizActivity : AppCompatActivity() {
                 return false
             }
             return true
+
         }
         fun GET_QUIZ(nickname : String){
             val url = getString(R.string.server_url) + "/quizzes/" + nickname
@@ -70,21 +70,25 @@ class SearchQuizActivity : AppCompatActivity() {
                 return
             }*/
             val jsonAry = JSONArray(response)
-            val solve_quiz_list: Array<Quiz> = arrayOf()
+//            val solve_quiz_list: ArrayList<Quiz> = arrayListOf() //intent 시 넘겨주기 위해 전역 변수로 선언
             for (i in 0 until jsonAry.length()) {
                 val jsonObj: JSONObject = jsonAry.getJSONObject(i)
-                solve_quiz_list.add(Quiz(jsonObj.getString("question"), jsonObj.getInt("answer"))
+                solve_quiz_list.add(Quiz(jsonObj.getInt("quizid"),jsonObj.getString("question"), jsonObj.getInt("answer")))
             }
-            reslist_res_RecView.adapter = Res_adapter(this@ResList_Activity, resList)
+//            rv_solve_quiz.adapter = Res_adapter(@SolveQuizActivity, solve_quiz_list)
 
         }
     }
 
-    fun SerarchQuiz_Click_Listener(view : View){
+    fun SearchQuiz_Click_Listener(view : View){
         when(view.id){
             R.id.btn_solve_quiz ->{
                 if(SearchQuiz_Control().edit_check()) {
                     SearchQuiz_Control().GET_QUIZ(sq_et_nickname.text.toString())
+
+                    val intent = Intent(this, SolveQuizActivity::class.java)
+                    intent.putExtra("solveQuizList",solve_quiz_list as Serializable) //list를 넘겨주기 위해
+                    startActivity(intent)
                 }
             }
         }

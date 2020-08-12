@@ -58,6 +58,7 @@
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
             android:text="ENTER"
+            android:onClick="SearchQuiz_Click_Listener"
             android:textColor="#FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@+id/sq_et_nickname"
