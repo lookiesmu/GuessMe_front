@@ -50,11 +50,11 @@ class SearchQuizActivity : AppCompatActivity() {
     }
 
     inner class asynctask : AsyncTask<String, Void, String>(){
+
         var state : Int = 0
 
         override fun doInBackground(vararg params: String): String {
             val url = params[0]
-            val str = Okhttp(applicationContext).GET(url)
             return Okhttp(applicationContext).GET(url)
         }
 
@@ -76,31 +76,23 @@ class SearchQuizActivity : AppCompatActivity() {
             val jsonObj = JSONObject(response) // 에러여도 여기까진 가능
 
             try {
-
                 val jsonObj_embedded = jsonObj.getJSONObject("_embedded")
                 val jsonQuizAry = jsonObj_embedded.getJSONArray("quizList")
-                this.state = 1
-
-
+                val intent = Intent(this@SearchQuizActivity, SolveQuizActivity::class.java)
+                intent.putExtra("nickname", sq_et_nickname.text.toString()) //list를 넘겨주기 위해
+                startActivity(intent)
             }catch (e:Exception){
-
                 Toast.makeText(applicationContext, "존재하지 않는 닉네임 입니다.", Toast.LENGTH_SHORT).show()
-                return
-
             }
+
 
 
             Toast.makeText(applicationContext,"퀴즈를 찾아왔어요!",Toast.LENGTH_SHORT).show()
 
-//            Log.d("정인삼삼삼","json?:"+response)
-//            val solve_quiz_list: ArrayList<Quiz> = arrayListOf() //intent 시 넘겨주기 위해 전역 변수로 선언
-//            Log.d("정인이이이","jsonAry_len:"+ jsonAry.length().toString() )
-//            for (i in 0 until jsonAry.length()) {
-//                val jsonObj: JSONObject = jsonAry.getJSONObject(i)
-//                solve_quiz_list.add(Quiz(jsonObj.getInt("quizid"),jsonObj.getString("question"), jsonObj.getInt("answer")))
-//            }
-//            rv_solve_quiz.adapter = Res_adapter(@SolveQuizActivity, solve_quiz_list)
+        }
 
+        fun getStateInt():Int{
+            return this.state
         }
     }
 
@@ -109,16 +101,12 @@ class SearchQuizActivity : AppCompatActivity() {
             R.id.btn_search ->{
                 if(SearchQuiz_Control().edit_check()) {
                     SearchQuiz_Control().GET_QUIZ(sq_et_nickname.text.toString())
-
-                    val intent = Intent(this, SolveQuizActivity::class.java)
-                    intent.putExtra("nickname", sq_et_nickname.text.toString()) //list를 넘겨주기 위해
-                    startActivity(intent)
-
                 }
             }
 
             R.id.btn_mypage ->{
-                val intent = Intent(this, MypageActivity::class.java)
+//                생성 이력이 있는 유저인지 제약해야 함
+                val intent = Intent(this, CreateQuizActivity::class.java)
                 startActivity(intent)
             }
         }
