@@ -43,7 +43,7 @@ class CreateQuizAdapter(private val quizList: ArrayList<Quiz>) :
 
                 }
             }
-            // O 버튼 클릭 리스너
+            // X 버튼 클릭 리스너
             iv_no.setOnClickListener{
                 ///answer=0로 바꾸기(no활성화)
                 if(quiz.answer == 1){
