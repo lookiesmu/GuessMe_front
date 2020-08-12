@@ -24,7 +24,7 @@ class CreateQuizAdapter(private val quizList: ArrayList<Quiz>) :
 
         fun bind (quiz: Quiz, index : Int) {
             // 질문이 없는 경우
-            if (quiz.content != "") {
+            if (quiz.content == "") {
                 qContent?.setText("응 질문없어~")
             } else {
                 qContent?.setText(quiz.content)
@@ -33,12 +33,12 @@ class CreateQuizAdapter(private val quizList: ArrayList<Quiz>) :
             // O 버튼 클릭 리스너
             iv_yes.setOnClickListener{
                 //answer=1로 바꾸기(yes활성화)
-                if(quiz.answer == 0){
+                if(quiz.answer != 1){
                     iv_yes.setImageResource(R.drawable.img_o_act)
                     iv_no.setImageResource(R.drawable.img_x_not)
                     quiz.answer = 1
                 } else{     // yes를 비활성화
-                    iv_no.setImageResource(R.drawable.img_o)
+                    iv_yes.setImageResource(R.drawable.img_o)
                     quiz.answer = -1
 
                 }
@@ -46,7 +46,7 @@ class CreateQuizAdapter(private val quizList: ArrayList<Quiz>) :
             // X 버튼 클릭 리스너
             iv_no.setOnClickListener{
                 ///answer=0로 바꾸기(no활성화)
-                if(quiz.answer == 1){
+                if(quiz.answer != 0){
                     iv_no.setImageResource(R.drawable.img_x)
                     iv_yes.setImageResource(R.drawable.img_o)
                     quiz.answer = 1

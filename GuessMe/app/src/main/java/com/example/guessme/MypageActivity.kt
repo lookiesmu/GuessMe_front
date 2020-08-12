@@ -70,7 +70,7 @@ class MypageActivity : AppCompatActivity() {
         }
 
         // response rv에 띄우기
-        fun show_Quiz(context: Context){
+        fun show_Rank(context: Context){
             Log.d("Mypage_Activity", "6")
             viewManager = LinearLayoutManager(context)
             viewAdapter = MyPageAdapter(rankList)
@@ -113,7 +113,7 @@ class MypageActivity : AppCompatActivity() {
             when(state) {
                 0 -> {
                     Log.d("Mypage_Activity","3")
-                    response = Okhttp().GET(url)
+                    response = Okhttp(applicationContext).GET(url)
                 }
                 1 -> {
                     response= Okhttp().DELETE(url,Json()
@@ -147,7 +147,7 @@ class MypageActivity : AppCompatActivity() {
                     }
 
                     // response rv에 띄우기
-                    Mypage_Control().show_Quiz(context)
+                    Mypage_Control().show_Rank(context)
                 }
                 1 -> {// 퀴즈 삭제 후 퀴즈생성 액티비티 이동
                     Toast.makeText(applicationContext, "성공적으로 퀴즈를 삭제하였습니다!", Toast.LENGTH_SHORT).show()
