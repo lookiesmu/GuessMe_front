@@ -25,5 +25,10 @@ class Json() {
             return true
         return false
     }
-
+    fun isnull(str : String):Boolean{
+        str.trim()
+        if(str[2] == 's' || str[3] == 'u')
+            return false
+        return true
+    }
 }
