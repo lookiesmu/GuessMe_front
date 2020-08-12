@@ -27,6 +27,8 @@ class SearchQuizActivity : AppCompatActivity() {
         setContentView(R.layout.activity_search_quiz)
         SearchQuiz_Control().edit_init()
 
+        val intent = Intent(this, MypageActivity::class.java)
+        startActivity(intent)
     }
 
     val solve_quiz_list: ArrayList<Quiz> = arrayListOf()
