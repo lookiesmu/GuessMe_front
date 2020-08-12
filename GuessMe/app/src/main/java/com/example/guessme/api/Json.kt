@@ -18,6 +18,7 @@ class Json() {
         jsonObject.put("password",pw)
         return jsonObject.toString()
     }
+
     fun isJson(str : String):Boolean{
         str.trim()
         if(str[0] == '{' || str[0] == '[')
