@@ -57,9 +57,11 @@ class CreateQuizActivity : AppCompatActivity() {
 
         // 선택했는지 확인
         fun select_check() : Boolean {
-
-            // 터치안했는지 확인하는 함수
-            // 활성화 값을 일
+            for (createQuiz in createQuizList){
+                if(createQuiz.answer == -1) {
+                    return false
+                }
+            }
             return true
         }
 
@@ -93,6 +95,8 @@ class CreateQuizActivity : AppCompatActivity() {
 
                     val intent = Intent(this, SearchQuizActivity::class.java)
                     startActivity(intent)
+                } else{
+                    Toast.makeText(applicationContext,"모든 항목에 답변해주세요.",Toast.LENGTH_SHORT).show()
                 }
             }
         }
