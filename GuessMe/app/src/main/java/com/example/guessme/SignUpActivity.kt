@@ -1,8 +1,6 @@
 package com.example.guessme
 
 import android.app.AlertDialog
-import com.example.guessme.R
-import com.example.guessme.Loading_Dialog
 import android.os.AsyncTask
 import android.os.Bundle
 import android.text.Editable
@@ -12,7 +10,9 @@ import android.view.View
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.guessme.SignUpActivity.SignUp_Control
+import com.example.guessme.api.Okhttp
+import com.example.guessme.api.Json
+import com.example.guessme.data.User
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import org.json.JSONObject
 
@@ -82,7 +82,8 @@ class SignUpActivity : AppCompatActivity() {
                 0 -> response = Okhttp().GET(url)
                 1 -> {
                     val pw = params[2]
-                    response = Okhttp().POST(url, Json().signup(user, pw))
+                    response = Okhttp().POST(url, Json()
+                        .signup(user, pw))
                 }
             }
             return response

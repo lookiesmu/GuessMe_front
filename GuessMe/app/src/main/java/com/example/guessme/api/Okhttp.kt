@@ -1,8 +1,9 @@
-package com.example.guessme
+package com.example.guessme.api
 
 
 import android.content.Context
 import android.util.Log
+import com.example.guessme.User_Control
 import okhttp3.*
 import java.io.IOException
 import java.util.concurrent.TimeUnit
@@ -50,7 +51,8 @@ class Okhttp() {
             val request = builder.build()
             response = client.newCall(request).execute()
             if(!response.header("Authorization").isNullOrEmpty())
-                User_Control(context!!).set_token(response.header("Authorization").toString())
+                User_Control(context!!)
+                    .set_token(response.header("Authorization").toString())
             return response.body()!!.string()
         }catch (e: IOException){
             return e.toString()
