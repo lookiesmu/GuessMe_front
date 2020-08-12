@@ -1,7 +1,10 @@
 package com.example.guessme.api
 
 
+import com.example.guessme.data.Quiz
+import com.example.guessme.data.QuizList
 import com.example.guessme.data.User
+import org.json.JSONArray
 import org.json.JSONObject
 
 class Json() {
@@ -25,5 +28,15 @@ class Json() {
             return true
         return false
     }
+
+    fun createQuiz(quizList: String): String{
+        // string -> QuizList
+            // 요 부분 일단 보류
+        // 제이슨 리스트로 저장
+            // 요 방식으로 잘 되는지 확인할 것!
+        var jsonArr = JSONArray(quizList)
+        return jsonArr.toString()
+    }
+
 
 }
