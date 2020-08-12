@@ -31,12 +31,10 @@ class Okhttp() {
             val builder= Request.Builder()
                 .url(url)
                 .get()
-            Log.d("network", "network: ")
             if(!token.isNullOrEmpty())
                 builder.header("X-AUTH-TOKEN", token!!)
             val request = builder.build()
             var response : Response = client.newCall(request).execute()
-            Log.d("network", "network: "+response.body()!!.string())
             return response.body()!!.string()
         }catch (e: IOException){
             return e.toString()

@@ -52,9 +52,9 @@ class SignUpActivity : AppCompatActivity() {
             asynctask().execute("0", url)
         }
 
-        fun POST_SignUp(pw: String) {
+        fun POST_SignUp(id: String, pw: String) {
             val url = getString(R.string.server_url) + getString(R.string.signup)
-            asynctask().execute("1", url, pw)
+            asynctask().execute("1", url, id, pw)
         }
 
         fun Dialog_Signup() {
@@ -81,9 +81,12 @@ class SignUpActivity : AppCompatActivity() {
             when (state) {
                 0 -> response = Okhttp().GET(url)
                 1 -> {
-                    val pw = params[2]
+                    val id = params[2]
+                    val pw = params[3]
+                    Log.d("network",url+id+pw)
                     response = Okhttp().POST(url, Json()
-                        .signup(user, pw))
+                        .signup(id, pw))
+                    Log.d("network", response)
                 }
             }
             return response
@@ -114,6 +117,7 @@ class SignUpActivity : AppCompatActivity() {
                 }
                 1 -> {
                     if (jsonObj.getBoolean("success")) {
+                        Toast.makeText(applicationContext, "회원가입 완료", Toast.LENGTH_SHORT)
                         SignUp_Control().Dialog_Signup()
                     } else {
                         Toast.makeText(applicationContext, "회원가입 실패", Toast.LENGTH_SHORT).show()
@@ -142,10 +146,10 @@ class SignUpActivity : AppCompatActivity() {
                     return
                 }
                 if (SignUp_Control().edit_check()) {
-                    val id = su_et_password.text.toString()
-                    val pw = su_et_passwordcheck.text.toString()
+                    val id = su_et_nickname.text.toString()
+                    val pw = su_et_password.text.toString()
                     user = User(id)
-                    SignUp_Control().POST_SignUp(pw)
+                    SignUp_Control().POST_SignUp(id,pw)
                 }
             }
         }
