@@ -38,5 +38,10 @@ class Json() {
         return jsonArr.toString()
     }
 
+    fun deleteQuiz(): String {
+        // 삭제할 때 뭐 보내는지 물어보기!
+        return ""
+    }
+
 
 }
