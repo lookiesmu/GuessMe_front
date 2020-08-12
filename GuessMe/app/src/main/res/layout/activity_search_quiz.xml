@@ -38,7 +38,7 @@
             app:layout_constraintVertical_bias="0.99"
             android:textSize="15dp"/>
 
-        <androidx.appcompat.widget.AppCompatEditText
+        <EditText
             android:id="@+id/sq_et_nickname"
             android:padding="10dp"
             android:hint="Search"
