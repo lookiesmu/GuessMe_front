@@ -4,18 +4,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="100dp">
-
+    android:layout_height="110dp"
+    android:layout_gravity="center"
+    android:background="@drawable/ef_shadow"
+    android:elevation="8dp">
 
     <TextView
         android:id="@+id/tv_rank_index"
         android:text="1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center_vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginLeft="30dp"
+        android:layout_marginLeft="50dp"
         android:textStyle="bold"
         android:textSize="50dp"
         android:textColor="@color/colorBlueO"
@@ -26,6 +29,7 @@
         android:text="바키지"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/tv_rank_score"
         app:layout_constraintStart_toEndOf="@+id/tv_rank_index"
@@ -43,10 +47,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginRight="30dp"
+        android:layout_marginRight="50dp"
         android:textStyle="bold"
         android:textSize="30dp"
         android:textColor="@color/colorBlueScore"
 
         />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

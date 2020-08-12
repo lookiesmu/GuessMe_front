@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,7 +9,7 @@
     android:elevation="8dp">
 
     <TextView
-        android:id="@+id/quiz_content"
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="술 마시고 지하철 종점 찍은 적이 있다."
@@ -22,17 +21,17 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/img_sq_o"
+        android:id="@+id/img_cq_o"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/img_sq_x"
+        app:layout_constraintEnd_toStartOf="@+id/img_cq_x"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginRight="5dp"
         app:srcCompat="@drawable/img_o" />
 
     <ImageView
-        android:id="@+id/img_sq_x"
+        android:id="@+id/img_cq_x"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
