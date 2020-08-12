@@ -25,4 +25,14 @@ class Json() {
         return false
     }
 
+    fun createQuiz(quizList: String): String{
+
+        // 제이슨 형식으로 저장
+        for (quiz in quizList){
+
+        }
+        return jsonObject.toString()
+    }
+
+
 }
