@@ -64,11 +64,11 @@ class SignInActivity : AppCompatActivity() {
                 return
             }
             Log.d("SignIn_Activity",response)
-            /*if(!Json().isJson(response)){
+            if(!Json().isJson(response)){
                 Log.d("network", response)
                 Toast.makeText(applicationContext,"네트워크 통신 오류",Toast.LENGTH_SHORT).show()
                 return
-            }*/
+            }
             val user = User(
                 si_et_nickname.text.toString()
             )
@@ -77,7 +77,7 @@ class SignInActivity : AppCompatActivity() {
                 return
             }
             User_Control(applicationContext).set_user(user)
-/*            startActivity(Intent(applicationContext, SolveQuizActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP))*/
+            startActivity(Intent(applicationContext, SolveQuizActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP))
             Toast.makeText(applicationContext,"로그인완료",Toast.LENGTH_SHORT).show()
             finish()
         }
