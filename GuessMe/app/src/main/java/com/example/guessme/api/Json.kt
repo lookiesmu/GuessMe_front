@@ -16,8 +16,8 @@ class Json() {
         return jsonObject.toString()
     }
 
-    fun signup(user : User?, pw : String) : String{
-        jsonObject.put("ninkname", user!!.nickname)
+    fun signup(nickname: String, pw : String) : String{
+        jsonObject.put("nickname", nickname)
         jsonObject.put("password",pw)
         return jsonObject.toString()
     }
@@ -36,6 +36,11 @@ class Json() {
             // 요 방식으로 잘 되는지 확인할 것!
         var jsonArr = JSONArray(quizList)
         return jsonArr.toString()
+    }
+
+    fun deleteQuiz(): String {
+        // 삭제할 때 뭐 보내는지 물어보기!
+        return ""
     }
 
 

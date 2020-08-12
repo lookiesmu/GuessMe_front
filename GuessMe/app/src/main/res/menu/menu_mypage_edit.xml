@@ -5,7 +5,7 @@
     android:viewportHeight="24.0">
 
     <item
-        android:id="@+id/filter_zone"
+        android:id="@+id/btn_delete_quiz"
         android:icon="@drawable/menu_edit"
         app:showAsAction="always"
         android:title="퀴즈 삭제"/>
