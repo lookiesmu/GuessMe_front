@@ -1,6 +1,7 @@
 package com.example.guessme.data
 
 data class Quiz (
-    var question: String,
+    val quizid: Int,
+    var content: String,
     var answer: IntArray
 )
