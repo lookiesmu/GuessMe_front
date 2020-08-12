@@ -28,8 +28,6 @@ class SearchQuizActivity : AppCompatActivity() {
         setContentView(R.layout.activity_search_quiz)
         SearchQuiz_Control().edit_init()
 
-        val intent = Intent(this, MypageActivity::class.java)
-        startActivity(intent)
     }
 
     val solve_quiz_list: ArrayList<Quiz> = arrayListOf()
@@ -67,11 +65,11 @@ class SearchQuizActivity : AppCompatActivity() {
                 return
             }
             Log.d("Search_Activity",response)
-            /*if(!Json().isJson(response)){
-                Log.d("network", response)
+            if(!Json().isJson(response)){
+                Log.d("퀴즈 입력 통신 에러", response)
                 Toast.makeText(applicationContext,"네트워크 통신 오류",Toast.LENGTH_SHORT).show()
                 return
-            }*/
+            }
             val jsonAry = JSONArray(response)
 //            val solve_quiz_list: ArrayList<Quiz> = arrayListOf() //intent 시 넘겨주기 위해 전역 변수로 선언
             for (i in 0 until jsonAry.length()) {
@@ -93,6 +91,11 @@ class SearchQuizActivity : AppCompatActivity() {
                     intent.putExtra("solveQuizList",solve_quiz_list) //list를 넘겨주기 위해
                     startActivity(intent)
                 }
+            }
+
+            R.id.btn_mypage ->{
+                val intent = Intent(this, MypageActivity::class.java)
+                startActivity(intent)
             }
         }
     }
