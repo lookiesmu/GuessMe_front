@@ -5,7 +5,6 @@ import android.content.Context
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Window
-import com.example.guessme.R
 
 class Loading_Dialog(context: Context) : Dialog(context) {
     override fun onCreate(savedInstanceState: Bundle?) {

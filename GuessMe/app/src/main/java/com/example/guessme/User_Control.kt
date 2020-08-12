@@ -2,6 +2,7 @@ package com.example.guessme
 
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
+import com.example.guessme.data.User
 
 class User_Control(context: Context) {
     val sharedPreferences = context.getSharedPreferences("User_Info", MODE_PRIVATE)
