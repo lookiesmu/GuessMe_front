@@ -22,12 +22,14 @@ class SolveQuizActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_solve_quiz)
+
         val nickname = intent.getStringExtra("nickname")
         Solve_Control().GET_QUIZ(nickname)
     }
 
     inner class Solve_Control(){
 
+        //닉네임에 해당하는 퀴즈 바로 받아오기
         fun GET_QUIZ(nickname : String) {
             val url = getString(R.string.server_url) + "/quizzes/" + nickname
             asynctask().execute(url)
@@ -58,11 +60,11 @@ class SolveQuizActivity : AppCompatActivity() {
                 return
             }
 
-            val jsonObj = JSONObject(response) // 에러여도 여기까진 가능
-
-            val jsonObj_embedded = jsonObj.getJSONObject("_embedded")
-            val jsonQuizAry = jsonObj_embedded.getJSONArray("quizList")
-            val solve_quiz_list: ArrayList<Quiz> = arrayListOf()
+            val jsonObj = JSONObject(response) // 객체 전체 응답 받아오기
+            val jsonObj_embedded = jsonObj.getJSONObject("_embedded") //특정 객체 받아오기
+            val jsonQuizAry = jsonObj_embedded.getJSONArray("quizList") //특정 배열 받아오기
+            Log.d("희지언니확인용",jsonQuizAry.toString())
+            val solve_quiz_list: ArrayList<Quiz> = arrayListOf() //퀴즈 리스트 담을 배열 생성
 
             for (i in 0 until jsonQuizAry.length()) {
                 val json_ojt: JSONObject = jsonQuizAry.getJSONObject(i)
