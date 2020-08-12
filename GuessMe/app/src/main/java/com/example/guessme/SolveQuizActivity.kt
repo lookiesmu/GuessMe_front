@@ -12,8 +12,6 @@ class SolveQuizActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_solve_quiz)
 
-        val solve_quiz_list = intent.getSerializableExtra("solveQuizList")
-        rv_solve_quiz.adapter = SolveQuizAdapter(this, solve_quiz_list as ArrayList<Quiz>)
     }
 
 
