@@ -1,6 +1,7 @@
-package com.example.guessme.data
+package com.example.guessme.api
 
 
+import com.example.guessme.data.User
 import org.json.JSONObject
 
 class Json() {
@@ -17,10 +18,12 @@ class Json() {
         jsonObject.put("password",pw)
         return jsonObject.toString()
     }
+
     fun isJson(str : String):Boolean{
         str.trim()
         if(str[0] == '{' || str[0] == '[')
             return true
         return false
     }
+
 }

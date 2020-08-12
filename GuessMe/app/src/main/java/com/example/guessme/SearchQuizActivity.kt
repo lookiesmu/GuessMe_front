@@ -10,7 +10,8 @@ import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.guessme.data.Json
+import com.example.guessme.api.Json
+import com.example.guessme.api.Okhttp
 import com.example.guessme.data.Quiz
 import com.example.guessme.data.User
 import kotlinx.android.synthetic.main.activity_search_quiz.*
@@ -64,11 +65,11 @@ class SearchQuizActivity : AppCompatActivity() {
                 return
             }
             Log.d("Search_Activity",response)
-            /*if(!Json().isJson(response)){
-                Log.d("network", response)
+            if(!Json().isJson(response)){
+                Log.d("퀴즈 입력 통신 에러", response)
                 Toast.makeText(applicationContext,"네트워크 통신 오류",Toast.LENGTH_SHORT).show()
                 return
-            }*/
+            }
             val jsonAry = JSONArray(response)
 //            val solve_quiz_list: ArrayList<Quiz> = arrayListOf() //intent 시 넘겨주기 위해 전역 변수로 선언
             for (i in 0 until jsonAry.length()) {
@@ -87,9 +88,14 @@ class SearchQuizActivity : AppCompatActivity() {
                     SearchQuiz_Control().GET_QUIZ(sq_et_nickname.text.toString())
 
                     val intent = Intent(this, SolveQuizActivity::class.java)
-                    intent.putExtra("solveQuizList",solve_quiz_list as Serializable) //list를 넘겨주기 위해
+                    intent.putExtra("solveQuizList",solve_quiz_list) //list를 넘겨주기 위해
                     startActivity(intent)
                 }
+            }
+
+            R.id.btn_mypage ->{
+                val intent = Intent(this, MypageActivity::class.java)
+                startActivity(intent)
             }
         }
     }
