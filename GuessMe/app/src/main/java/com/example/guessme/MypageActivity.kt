@@ -42,8 +42,10 @@ class MypageActivity : AppCompatActivity() {
         //setHasOptionsMenu(true)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.menu_mypage_edit, menu)
+        return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
