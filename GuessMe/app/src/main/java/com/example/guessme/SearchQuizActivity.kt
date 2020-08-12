@@ -27,6 +27,7 @@ class SearchQuizActivity : AppCompatActivity() {
 
 
     inner class SearchQuiz_Control() {
+
         fun edit_init(){
             sq_et_nickname.addTextChangedListener(EditListener())
         }
@@ -42,18 +43,18 @@ class SearchQuizActivity : AppCompatActivity() {
 
         }
 
-        fun GET_QUIZ(nickname : String){
+        fun GET_QUIZ(nickname : String) {
             val url = getString(R.string.server_url) + "/quizzes/" + nickname
             asynctask().execute(url)
         }
     }
 
     inner class asynctask : AsyncTask<String, Void, String>(){
+        var state : Int = 0
+
         override fun doInBackground(vararg params: String): String {
             val url = params[0]
-            Log.d("두인백그라운드",url)
             val str = Okhttp(applicationContext).GET(url)
-            Log.d("받아왔니?",str)
             return Okhttp(applicationContext).GET(url)
         }
 
@@ -78,6 +79,8 @@ class SearchQuizActivity : AppCompatActivity() {
 
                 val jsonObj_embedded = jsonObj.getJSONObject("_embedded")
                 val jsonQuizAry = jsonObj_embedded.getJSONArray("quizList")
+                this.state = 1
+
 
             }catch (e:Exception){
 
@@ -106,9 +109,11 @@ class SearchQuizActivity : AppCompatActivity() {
             R.id.btn_search ->{
                 if(SearchQuiz_Control().edit_check()) {
                     SearchQuiz_Control().GET_QUIZ(sq_et_nickname.text.toString())
+
                     val intent = Intent(this, SolveQuizActivity::class.java)
                     intent.putExtra("nickname", sq_et_nickname.text.toString()) //list를 넘겨주기 위해
                     startActivity(intent)
+
                 }
             }
 
