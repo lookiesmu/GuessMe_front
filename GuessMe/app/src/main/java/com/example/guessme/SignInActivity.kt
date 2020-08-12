@@ -68,7 +68,6 @@ class SignInActivity : AppCompatActivity() {
             }
             Log.d("SignIn_Activity",response)
             if(!Json().isJson(response)){
-                Log.d("정인ㅠㅠnetwork", response)
                 Toast.makeText(applicationContext,"네트워크 통신 오류",Toast.LENGTH_SHORT).show()
                 return
             }
