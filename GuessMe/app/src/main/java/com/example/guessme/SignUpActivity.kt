@@ -67,6 +67,33 @@ class SignUpActivity : AppCompatActivity() {
 
     }
 
+    //Activity 클릭 리스너
+    fun Signup_Click_Listener(view: View) {
+        when (view.id) {
+            R.id.su_duplecheck -> {
+                val id = su_et_nickname.text.toString()
+                if (id.isEmpty())
+                    Toast.makeText(applicationContext, "닉네임를 입력해주세요", Toast.LENGTH_SHORT).show()
+                else {
+                    SignUp_Control().GET_Check(id)
+                }
+            }
+            R.id.su_btn -> {
+                if (!checkId) {
+                    Toast.makeText(applicationContext, "중복확인이 필요합니다", Toast.LENGTH_SHORT).show()
+                    return
+                }
+                if (SignUp_Control().edit_check()) {
+                    val id = su_et_password.text.toString()
+                    val pw = su_et_passwordcheck.text.toString()
+                    user = User(id)
+                    SignUp_Control().POST_SignUp(pw)
+                }
+            }
+        }
+    }
+
+
     inner class asynctask : AsyncTask<String, Void, String>() {
         var state: Int = -1 //state == 0 : GET_아이디 중복확인, state == 1 : POST_회원가입
         var loadingDialog = Loading_Dialog(this@SignUpActivity)
@@ -121,33 +148,6 @@ class SignUpActivity : AppCompatActivity() {
                 }
             }
             loadingDialog.dismiss()
-        }
-    }
-
-
-    //Activity 클릭 리스너
-    fun Signup_Click_Listener(view: View) {
-        when (view.id) {
-            R.id.su_duplecheck -> {
-                val id = su_et_nickname.text.toString()
-                if (id.isEmpty())
-                    Toast.makeText(applicationContext, "닉네임를 입력해주세요", Toast.LENGTH_SHORT).show()
-                else {
-                    SignUp_Control().GET_Check(id)
-                }
-            }
-            R.id.su_btn -> {
-                if (!checkId) {
-                    Toast.makeText(applicationContext, "중복확인이 필요합니다", Toast.LENGTH_SHORT).show()
-                    return
-                }
-                if (SignUp_Control().edit_check()) {
-                    val id = su_et_password.text.toString()
-                    val pw = su_et_passwordcheck.text.toString()
-                    user = User(id)
-                    SignUp_Control().POST_SignUp(pw)
-                }
-            }
         }
     }
 

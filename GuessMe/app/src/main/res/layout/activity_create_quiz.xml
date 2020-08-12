@@ -51,6 +51,7 @@
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:clickable="true"
+        android:onClick="CreateQuiz_Click_Listener"
         android:src="@drawable/btn_create_real"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

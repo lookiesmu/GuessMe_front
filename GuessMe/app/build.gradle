@@ -31,6 +31,7 @@ android {
 }
 
 dependencies {
+    implementation 'com.android.support:recyclerview-v7:29.0.0'
     implementation("com.squareup.okhttp3:okhttp:3.8.0")
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
