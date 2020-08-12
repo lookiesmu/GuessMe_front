@@ -105,7 +105,8 @@ class SearchQuizActivity : AppCompatActivity() {
             }
 
             R.id.btn_mypage ->{
-                val intent = Intent(this, MypageActivity::class.java)
+//                생성 이력이 있는 유저인지 제약해야 함
+                val intent = Intent(this, CreateQuizActivity::class.java)
                 startActivity(intent)
             }
         }
