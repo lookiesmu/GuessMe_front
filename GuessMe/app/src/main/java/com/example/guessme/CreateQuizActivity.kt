@@ -15,6 +15,7 @@ import com.example.guessme.api.Json
 import com.example.guessme.api.Okhttp
 import com.example.guessme.data.Quiz
 import com.example.guessme.util.Constants.Companion.BASE_URL
+import kotlinx.android.synthetic.main.activity_create_quiz.*
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -31,6 +32,10 @@ class CreateQuizActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_quiz)
         //Log.d("CreateQuiz_Activity","1")
+
+        // 닉네임 타이틀에 출력
+        val username = User_Control(applicationContext).get_user().nickname
+        tv_cq_title.setText(String.format("%s님의 퀴즈를 만들어 보세요!",username))
 
 
         CreateQuiz_Control().GET_CreateQuiz()
@@ -52,7 +57,17 @@ class CreateQuizActivity : AppCompatActivity() {
         // 퀴즈 생성
         fun POST_CreateQuiz(){
             val url = getString(R.string.server_url) + "/quizzes"
-            asynctask().execute("1", url, createQuizList.toString())
+            val jsonObj = JSONObject()
+            val jsonArr = JSONArray()
+            for (i in 0 until createQuizList.size) {
+                jsonObj.put("quizId",createQuizList[i].quizId)
+                jsonObj.put("content",createQuizList[i].content)
+                jsonObj.put("answer",createQuizList[i].answer)
+
+                Log.d("postpost",jsonObj.toString())
+                jsonArr.put(jsonObj)
+            }
+            asynctask().execute("1", url, jsonArr.toString())
         }
 
         // 선택했는지 확인
@@ -62,6 +77,7 @@ class CreateQuizActivity : AppCompatActivity() {
                     return false
                 }
             }
+            Log.d("CreateQuiz_Activity","check = not null")
             return true
         }
 
