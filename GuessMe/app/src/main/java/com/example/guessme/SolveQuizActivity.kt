@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.guessme.api.Json
 import com.example.guessme.api.Okhttp
 import com.example.guessme.data.Quiz
+import com.example.guessme.data.SolveAnswer
+import kotlinx.android.synthetic.main.activity_create_quiz.*
 import kotlinx.android.synthetic.main.activity_search_quiz.*
 import kotlinx.android.synthetic.main.activity_solve_quiz.*
 import org.json.JSONObject
@@ -17,6 +19,11 @@ import java.lang.Exception
 import java.util.logging.Logger.global
 
 class SolveQuizActivity : AppCompatActivity() {
+
+
+    val solve_quiz_list: ArrayList<Quiz> = arrayListOf() //퀴즈 리스트 담을 배열 생성
+    val my_answer_list: ArrayList<SolveAnswer> = arrayListOf() //퀴즈에 대한 유저의 정답 리스트
+
     lateinit var solve_adapter : SolveQuizAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,6 +31,7 @@ class SolveQuizActivity : AppCompatActivity() {
         setContentView(R.layout.activity_solve_quiz)
 
         val nickname = intent.getStringExtra("nickname")
+        tv_solve_quiz.setText(String.format("%s님의 퀴즈를 풀어보세요!",nickname))
         Solve_Control().GET_QUIZ(nickname)
     }
 
@@ -33,6 +41,18 @@ class SolveQuizActivity : AppCompatActivity() {
         fun GET_QUIZ(nickname : String) {
             val url = getString(R.string.server_url) + "/quizzes/" + nickname
             asynctask().execute(url)
+        }
+
+        fun ComputeGrade():Int{
+
+            var grade = 0
+
+            for (i in 0 until solve_quiz_list.size){
+                if (my_answer_list.get(i).myanswer == solve_quiz_list.get(i).answer)
+                    grade += 20
+            }
+
+            return  grade
         }
 
     }
@@ -63,8 +83,6 @@ class SolveQuizActivity : AppCompatActivity() {
             val jsonObj = JSONObject(response) // 객체 전체 응답 받아오기
             val jsonObj_embedded = jsonObj.getJSONObject("_embedded") //특정 객체 받아오기
             val jsonQuizAry = jsonObj_embedded.getJSONArray("quizList") //특정 배열 받아오기
-            Log.d("희지언니확인용",jsonQuizAry.toString())
-            val solve_quiz_list: ArrayList<Quiz> = arrayListOf() //퀴즈 리스트 담을 배열 생성
 
             for (i in 0 until jsonQuizAry.length()) {
                 val json_ojt: JSONObject = jsonQuizAry.getJSONObject(i)
