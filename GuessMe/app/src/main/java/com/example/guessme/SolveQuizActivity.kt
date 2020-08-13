@@ -11,12 +11,8 @@ import com.example.guessme.api.Json
 import com.example.guessme.api.Okhttp
 import com.example.guessme.data.Quiz
 import com.example.guessme.data.SolveAnswer
-import kotlinx.android.synthetic.main.activity_create_quiz.*
-import kotlinx.android.synthetic.main.activity_search_quiz.*
 import kotlinx.android.synthetic.main.activity_solve_quiz.*
 import org.json.JSONObject
-import java.lang.Exception
-import java.util.logging.Logger.global
 
 class SolveQuizActivity : AppCompatActivity() {
 
@@ -33,6 +29,8 @@ class SolveQuizActivity : AppCompatActivity() {
         val nickname = intent.getStringExtra("nickname")
         tv_solve_quiz.setText(String.format("%s님의 퀴즈를 풀어보세요!",nickname))
         Solve_Control().GET_QUIZ(nickname)
+
+
     }
 
     inner class Solve_Control(){
@@ -104,4 +102,11 @@ class SolveQuizActivity : AppCompatActivity() {
         asynctask().cancel(true)
         super.onPause()
     }
+
+    override fun onBackPressed() {
+        Log.d("finish","finish")
+        this@SolveQuizActivity.finish()
+    }
+
+
 }

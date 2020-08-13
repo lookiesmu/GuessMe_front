@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.guessme.api.Json
 import com.example.guessme.api.Okhttp
 import com.example.guessme.data.Quiz
+import kotlinx.android.synthetic.main.activity_create_quiz.*
 import kotlinx.android.synthetic.main.activity_search_quiz.*
 import org.json.JSONArray
 import org.json.JSONObject
@@ -19,10 +20,13 @@ import java.lang.Exception
 
 class SearchQuizActivity : AppCompatActivity() {
 
+    var state = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search_quiz)
         SearchQuiz_Control().edit_init()
+
     }
 
 
@@ -45,16 +49,21 @@ class SearchQuizActivity : AppCompatActivity() {
 
         fun GET_QUIZ(nickname : String) {
             val url = getString(R.string.server_url) + "/quizzes/" + nickname
-            asynctask().execute(url)
+            asynctask().execute("0",url)
         }
+
+        fun GET_USER_QUIZ(username:String){
+            val url = getString(R.string.server_url) + "/quizzes/" + username
+            asynctask().execute("1",url)
+        }
+
     }
 
     inner class asynctask : AsyncTask<String, Void, String>(){
-
-        var state : Int = 0
-
+        var state: Int = -1 //state == 0 : GET_퀴즈찾기, state == 1 : GET_해당유저의퀴즈찾기
         override fun doInBackground(vararg params: String): String {
-            val url = params[0]
+            state = Integer.parseInt(params[0])
+            val url = params[1]
             return Okhttp(applicationContext).GET(url)
         }
 
@@ -78,36 +87,49 @@ class SearchQuizActivity : AppCompatActivity() {
             try {
                 val jsonObj_embedded = jsonObj.getJSONObject("_embedded")
                 val jsonQuizAry = jsonObj_embedded.getJSONArray("quizList")
-                val intent = Intent(this@SearchQuizActivity, SolveQuizActivity::class.java)
-                intent.putExtra("nickname", sq_et_nickname.text.toString()) //list를 넘겨주기 위해
-                startActivity(intent)
+
+                when(state){
+                    0 -> {
+                        val intent = Intent(this@SearchQuizActivity, SolveQuizActivity::class.java)
+                        intent.putExtra("nickname", sq_et_nickname.text.toString()) //list를 넘겨주기 위해
+                        Toast.makeText(applicationContext, "퀴즈를 찾아왔어요!", Toast.LENGTH_SHORT).show()
+                        startActivity(intent)
+                    }
+                    1 -> {
+                        val intent = Intent(this@SearchQuizActivity, MypageActivity::class.java)
+                        startActivity(intent)
+                    }
+                }
+
+
             }catch (e:Exception){
-                Toast.makeText(applicationContext, "존재하지 않는 닉네임 입니다.", Toast.LENGTH_SHORT).show()
+                when(state){
+                    0 -> {
+                        Toast.makeText(applicationContext, "존재하지 않는 닉네임 입니다.", Toast.LENGTH_SHORT).show()
+                    }
+                    1 -> {
+                        val intent = Intent(this@SearchQuizActivity, CreateQuizActivity::class.java)
+                        startActivity(intent)
+                    }
+                }
             }
 
 
-
-            Toast.makeText(applicationContext,"퀴즈를 찾아왔어요!",Toast.LENGTH_SHORT).show()
-
-        }
-
-        fun getStateInt():Int{
-            return this.state
         }
     }
 
     fun SearchQuiz_Click_Listener(view : View){
         when(view.id){
             R.id.btn_search ->{
-                if(SearchQuiz_Control().edit_check()) {
+                if (SearchQuiz_Control().edit_check()) {
                     SearchQuiz_Control().GET_QUIZ(sq_et_nickname.text.toString())
                 }
             }
 
             R.id.btn_mypage ->{
 //                생성 이력이 있는 유저인지 제약해야 함
-                val intent = Intent(this, CreateQuizActivity::class.java)
-                startActivity(intent)
+                val username = User_Control(applicationContext).get_user().nickname
+                SearchQuiz_Control().GET_USER_QUIZ(username.toString())
             }
         }
     }
