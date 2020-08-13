@@ -1,6 +1,7 @@
 package com.example.guessme.api
 
 
+import android.util.Log
 import com.example.guessme.data.Quiz
 import com.example.guessme.data.QuizList
 import com.example.guessme.data.User
@@ -39,7 +40,14 @@ class Json() {
             // 요 부분 일단 보류
         // 제이슨 리스트로 저장
             // 요 방식으로 잘 되는지 확인할 것!
+
+        Log.d("Jsonaaaaaaaa",quizList)
+        for (i in 0 until quizList.length){
+            i
+        }
         var jsonArr = JSONArray(quizList)
+        Log.d("Jsonaaaaaaaa",jsonArr.toString())
+
         return jsonArr.toString()
     }
 
