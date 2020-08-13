@@ -89,7 +89,7 @@ class SolveQuizActivity : AppCompatActivity() {
                 solve_quiz_list.add(Quiz(json_ojt.getInt("quizId"),json_ojt.getString("content"), json_ojt.getInt("answer")))
             }
 
-            rv_solve_quiz.adapter = SolveQuizAdapter(this@SolveQuizActivity, solve_quiz_list)
+            rv_solve_quiz.adapter = SolveQuizAdapter(this@SolveQuizActivity, solve_quiz_list, my_answer_list)
 
         }
 

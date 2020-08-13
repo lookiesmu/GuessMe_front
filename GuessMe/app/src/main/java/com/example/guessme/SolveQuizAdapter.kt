@@ -10,9 +10,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.guessme.adapters.CreateQuizAdapter
 import com.example.guessme.data.Quiz
+import com.example.guessme.data.SolveAnswer
 
 
-class SolveQuizAdapter(val context: Context, val solveQuizList : ArrayList<Quiz>) :
+class SolveQuizAdapter(val context: Context, val solveQuizList : ArrayList<Quiz>, val myAnswerList : ArrayList<SolveAnswer>) :
     RecyclerView.Adapter<SolveQuizAdapter.SolveQuizholder>() {
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): SolveQuizholder {
