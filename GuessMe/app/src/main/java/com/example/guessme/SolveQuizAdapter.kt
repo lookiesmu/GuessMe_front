@@ -8,12 +8,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.guessme.adapters.CreateQuizAdapter
 import com.example.guessme.data.Quiz
-import com.example.guessme.data.SolveAnswer
 
 
-class SolveQuizAdapter(val context: Context, val solveQuizList : ArrayList<Quiz>, val myAnswerList : ArrayList<SolveAnswer>) :
+class SolveQuizAdapter(val context: Context, val solveQuizList : ArrayList<Quiz>, val myAnswerList : ArrayList<Int>) :
     RecyclerView.Adapter<SolveQuizAdapter.SolveQuizholder>() {
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): SolveQuizholder {
@@ -31,6 +29,7 @@ class SolveQuizAdapter(val context: Context, val solveQuizList : ArrayList<Quiz>
         Log.e("리사이클러뷰 3",solveQuizList[2].toString())
         Log.e("리사이클러뷰 4",solveQuizList[3].toString())
         Log.e("리사이클러뷰 5",solveQuizList[4].toString())
+        Log.d("마이앤썰리스트 1", myAnswerList[0].toString())
 
     }
 
@@ -41,39 +40,64 @@ class SolveQuizAdapter(val context: Context, val solveQuizList : ArrayList<Quiz>
         val iv_yes = view.findViewById<ImageView>(R.id.img_sq_o)
         val iv_no = view.findViewById<ImageView>(R.id.img_sq_x)
 
-        fun bind (quiz: Quiz, index : Int) {
+        fun bind (solve_quiz: Quiz, index: Int) {
             // 질문이 없는 경우
-            if (quiz.content == "") {
+            if (solve_quiz.content == "") {
                 tv_content?.setText("응 질문없어~")
             } else {
-                tv_content?.setText(quiz.content)
+                tv_content?.setText(solve_quiz.content)
             }
+
+            fun setYes(){
+                iv_yes.setImageResource(R.drawable.img_o_act)
+                iv_no.setImageResource(R.drawable.img_x_not)
+                myAnswerList[index] = 1
+            }
+
+            fun setNo(){
+                iv_yes.setImageResource(R.drawable.img_o)
+                iv_no.setImageResource(R.drawable.img_x)
+                myAnswerList[index] = 0
+            }
+
+
+            fun clearYesNo(){
+                    iv_yes.setImageResource(R.drawable.img_o)
+                    iv_no.setImageResource(R.drawable.img_x_not)
+                    myAnswerList[index] = -1
+            }
+
 
             // O 버튼 클릭 리스너
             iv_yes.setOnClickListener{
                 //answer=1로 바꾸기(yes활성화)
-                if(quiz.answer != 1){
-                    iv_yes.setImageResource(R.drawable.img_o_act)
-                    iv_no.setImageResource(R.drawable.img_x_not)
-                    quiz.answer = 1
-                } else{     // yes를 비활성화
-                    iv_yes.setImageResource(R.drawable.img_o)
-                    quiz.answer = -1
+                if(myAnswerList[index] < 0){
+                    setYes()
+                }
 
+                else if(myAnswerList[index] == 1){
+                    clearYesNo()
+                }
+
+                else{
+                    setYes()
                 }
             }
+
             // X 버튼 클릭 리스너
             iv_no.setOnClickListener{
                 ///answer=0로 바꾸기(no활성화)
-                if(quiz.answer != 0){
-                    iv_no.setImageResource(R.drawable.img_x)
-                    iv_yes.setImageResource(R.drawable.img_o)
-                    quiz.answer = 1
-                } else{     // no 비활성화
-                    iv_no.setImageResource(R.drawable.img_x_not)
-                    quiz.answer = -1
+                if(myAnswerList[index] < 0){
+                    setNo()
                 }
 
+                else if(myAnswerList[index] == 1){
+                    setNo()
+                }
+
+                else{
+                    clearYesNo()
+                }
             }
         }
     }

@@ -18,7 +18,9 @@ class SolveQuizActivity : AppCompatActivity() {
 
 
     val solve_quiz_list: ArrayList<Quiz> = arrayListOf() //퀴즈 리스트 담을 배열 생성
-    val my_answer_list: ArrayList<SolveAnswer> = arrayListOf() //퀴즈에 대한 유저의 정답 리스트
+    val my_answer_list: ArrayList<Int> = arrayListOf(-1,-1,-1,-1,-1) //퀴즈에 대한 유저의 정답 리스트(초기값 : -1)
+
+
 
     lateinit var solve_adapter : SolveQuizAdapter
 
@@ -46,7 +48,7 @@ class SolveQuizActivity : AppCompatActivity() {
             var grade = 0
 
             for (i in 0 until solve_quiz_list.size){
-                if (my_answer_list.get(i).myanswer == solve_quiz_list.get(i).answer)
+                if (my_answer_list[i] == solve_quiz_list.get(i).answer)
                     grade += 20
             }
 
@@ -95,6 +97,9 @@ class SolveQuizActivity : AppCompatActivity() {
 
     fun SolveQuiz_Click_Listener(view : View){
         when(view.id){
+            R.id.btn_solve_quiz ->{
+                Log.d("마이앤썰리스트굿굿",my_answer_list.toString())
+            }
         }
     }
 
