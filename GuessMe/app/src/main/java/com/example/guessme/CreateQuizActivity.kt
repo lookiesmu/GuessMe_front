@@ -30,7 +30,9 @@ class CreateQuizActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_quiz)
-        //Log.d("CreateQuiz_Activity","1")
+        val username = User_Control(applicationContext).get_user()
+
+        Log.d("윤한",username.nickname)
 
 
         CreateQuiz_Control().GET_CreateQuiz()
