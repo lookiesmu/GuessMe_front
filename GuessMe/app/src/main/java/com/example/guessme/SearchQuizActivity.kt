@@ -105,7 +105,7 @@ class SearchQuizActivity : AppCompatActivity() {
             }catch (e:Exception){
                 when(state){
                     0 -> {
-                        Toast.makeText(applicationContext, "존재하지 않는 닉네임 입니다.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(applicationContext, "퀴즈가 존재하지 않는 닉네임 입니다.", Toast.LENGTH_SHORT).show()
                     }
                     1 -> {
                         val intent = Intent(this@SearchQuizActivity, CreateQuizActivity::class.java)
