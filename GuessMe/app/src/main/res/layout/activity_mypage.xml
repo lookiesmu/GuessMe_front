@@ -8,21 +8,21 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar_mypage"
         android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:elevation="0dp"
+        android:layout_height="70dp"
+        app:elevation="0dp"
         android:theme="@style/AppTheme.AppBarOverlay"
+        android:background="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="70dp"
             android:elevation="0dp"
             app:popupTheme="@style/AppTheme.AppBarOverlay"
+            android:background="#F9F9F9"
             app:layout_collapseMode="parallax">
-
-
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -31,13 +31,14 @@
             android:id="@+id/tv_myrank"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="20dp"
             android:textColor="@color/colorPrimaryDark"
+            android:text="하하하"
             android:textSize="40dp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/appbar_mypage" />
 
         <FrameLayout
             android:id="@+id/frameLayout"

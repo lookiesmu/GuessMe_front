@@ -10,6 +10,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -39,6 +40,11 @@ class MypageActivity : AppCompatActivity() {
         setContentView(R.layout.activity_mypage)
         Log.d("Mypage_Activity", "1")
 
+        // 액션바 초기화
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        getSupportActionBar()?.setDisplayShowTitleEnabled(false)
+
         // 닉네임 타이틀에 출력
         val username = User_Control(applicationContext).get_user().nickname
         tv_myrank.setText(String.format("%s님의 퀴즈 순위",username))
@@ -64,21 +70,7 @@ class MypageActivity : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
     }
-//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-//        val inflater: MenuInflater = menuInflater
-//        inflater.inflate(R.menu.menu_mypage_edit, menu)
-//        return true
-//    }
-//
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        return when (item.itemId) {
-//            R.id.btn_delete_quiz -> {
-//                Mypage_Control().DELETE_Quiz()
-//                true
-//            }
-//            else -> super.onOptionsItemSelected(item)
-//        }
-//    }
+
 
     inner class Mypage_Control {
         // 서버로부터 차트 get
@@ -129,7 +121,7 @@ class MypageActivity : AppCompatActivity() {
         }
 
         override fun doInBackground(vararg params: String): String {
-            state = Integer.parseInt(params[0])
+            state = Integer.parseInt(params[0]) // 0: 차트 조회, 1: 퀴즈 삭제
             val url=params[1]
             var response: String = ""
             when(state) {
@@ -138,7 +130,7 @@ class MypageActivity : AppCompatActivity() {
                     response = Okhttp(applicationContext).GET(url)
                 }
                 1 -> {
-                    response= Okhttp().DELETE(url)
+                    response= Okhttp(applicationContext).DELETE(url)
                 }
             }
             Log.d("Mypage_Activity","4")
@@ -177,8 +169,8 @@ class MypageActivity : AppCompatActivity() {
                 }
                 1 -> {// 퀴즈 삭제 후 퀴즈생성 액티비티 이동
                     Toast.makeText(applicationContext, "성공적으로 퀴즈를 삭제하였습니다!", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(context, CreateQuizActivity::class.java)
-                    startActivity(intent)
+//                    val intent = Intent(context, CreateQuizActivity::class.java)
+//                    startActivity(intent)
                 }
             }
             Log.d("Mypage_Activity", "6")
