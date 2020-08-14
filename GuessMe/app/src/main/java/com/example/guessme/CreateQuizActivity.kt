@@ -143,7 +143,7 @@ class CreateQuizActivity : AppCompatActivity() {
                 1 -> {
                      var quizList = params[2]
 
-                    response = Okhttp().POST(url, Json()
+                    response = Okhttp(applicationContext).POST(url, Json()
                         .createQuiz(quizList))
                 }
             }
