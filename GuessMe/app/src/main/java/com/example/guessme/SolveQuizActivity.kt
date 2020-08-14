@@ -6,11 +6,11 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.guessme.adapters.SolveQuizAdapter
 import com.example.guessme.api.Json
 import com.example.guessme.api.Okhttp
 import com.example.guessme.data.Quiz
 import kotlinx.android.synthetic.main.activity_solve_quiz.*
-import kotlinx.android.synthetic.main.dialog_score.*
 import org.json.JSONObject
 
 class SolveQuizActivity : AppCompatActivity() {
@@ -48,16 +48,25 @@ class SolveQuizActivity : AppCompatActivity() {
     }
 
     inner class asynctask : AsyncTask<String, Void, String>(){
-
+        // state = 1 -> GET : 퀴즈 조회 | 2 -> POST : 점수 전송
         var state:Int = -1
 
         override fun doInBackground(vararg params: String): String {
             state = Integer.parseInt(params[0])
             val url = params[1]
-            if (state>0) {
-                val score = params[2]
+
+            when(state){
+                0->{
+                    Log.d("score","score")
+                    return Okhttp(applicationContext).GET(url)
+                }
+                1->{
+                    val score = params[2]
+                    Log.d("score",score)
+                    return Okhttp(applicationContext).POST(url,Json().submitScore(score))
+                }
             }
-            Log.d("score","score")
+
             return Okhttp(applicationContext).GET(url)
         }
 
@@ -102,6 +111,8 @@ class SolveQuizActivity : AppCompatActivity() {
                     //when post
                 }
             }
+
+
         }
 
     }
