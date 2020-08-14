@@ -42,6 +42,7 @@ class MypageActivity : AppCompatActivity() {
         //setHasOptionsMenu(true)
     }
 
+    // menu control
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.menu_mypage_edit, menu)
@@ -138,12 +139,15 @@ class MypageActivity : AppCompatActivity() {
             }
 //            Log.d("Mypage_Activity",response)
 
-            var jsonArr = JSONArray(response)
+            var jsonObj = JSONObject(response)
             when(state) {
+
                 0 -> {// 차트 조회
+                    var jsonArr = jsonObj.getJSONArray("ranking")
                     for (i in 0 until jsonArr.length()) {
                         var jsonObj: JSONObject = jsonArr.getJSONObject(i)
-                        rankList.add(Rank(jsonObj.getInt("index"),jsonObj.getString("nickname"), jsonObj.getInt("score")))
+                        var jsonObj_user = jsonObj.getJSONObject("answerer")
+                        rankList.add(Rank(i, jsonObj_user.getString("nickname"), jsonObj.getInt("score")))
                     }
 
                     // response rv에 띄우기
