@@ -16,10 +16,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.guessme.adapters.MyPageAdapter
 import com.example.guessme.api.Json
 import com.example.guessme.api.Okhttp
-import com.example.guessme.data.Quiz
 import com.example.guessme.data.Rank
 import com.example.guessme.util.Constants
-import org.json.JSONArray
 import org.json.JSONObject
 
 class MypageActivity : AppCompatActivity() {
@@ -37,26 +35,41 @@ class MypageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mypage)
         Log.d("Mypage_Activity", "1")
-
         Mypage_Control().GET_Rank()
-        //setHasOptionsMenu(true)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    // menu control
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.menu_mypage_edit, menu)
         return true
     }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle item selection
         return when (item.itemId) {
             R.id.btn_delete_quiz -> {
                 Mypage_Control().DELETE_Quiz()
+                startActivity(Intent(applicationContext,CreateQuizActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP))
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
     }
+//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+//        val inflater: MenuInflater = menuInflater
+//        inflater.inflate(R.menu.menu_mypage_edit, menu)
+//        return true
+//    }
+//
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        return when (item.itemId) {
+//            R.id.btn_delete_quiz -> {
+//                Mypage_Control().DELETE_Quiz()
+//                true
+//            }
+//            else -> super.onOptionsItemSelected(item)
+//        }
+//    }
 
     inner class Mypage_Control {
         // 서버로부터 차트 get
@@ -65,13 +78,9 @@ class MypageActivity : AppCompatActivity() {
             asynctask().execute("0", rank_url)
         }
 
-        fun DELETE_Quiz(){
-            asynctask().execute("1", quiz_url)
-        }
-
         // response rv에 띄우기
         fun show_Rank(context: Context){
-            Log.d("Mypage_Activity", "6")
+            Log.d("Mypage_Activity", "5")
             viewManager = LinearLayoutManager(context)
             viewAdapter = MyPageAdapter(rankList)
 
@@ -86,6 +95,9 @@ class MypageActivity : AppCompatActivity() {
                 // specify an viewAdapter (see also next example)
                 adapter = viewAdapter
             }
+        }
+        fun DELETE_Quiz(){
+            asynctask().execute("1", quiz_url)
         }
 
     }
@@ -116,8 +128,7 @@ class MypageActivity : AppCompatActivity() {
                     response = Okhttp(applicationContext).GET(url)
                 }
                 1 -> {
-                    response= Okhttp().DELETE(url,Json()
-                        .deleteQuiz())
+                    response= Okhttp().DELETE(url)
                 }
             }
             Log.d("Mypage_Activity","4")
@@ -138,13 +149,18 @@ class MypageActivity : AppCompatActivity() {
             }
 //            Log.d("Mypage_Activity",response)
 
-            var jsonArr = JSONArray(response)
+            var jsonObj = JSONObject(response)
             when(state) {
+
                 0 -> {// 차트 조회
+                    var jsonArr = jsonObj.getJSONArray("ranking")
                     for (i in 0 until jsonArr.length()) {
                         var jsonObj: JSONObject = jsonArr.getJSONObject(i)
-                        rankList.add(Rank(jsonObj.getInt("index"),jsonObj.getString("nickname"), jsonObj.getInt("score")))
+                        var jsonObj_user = jsonObj.getJSONObject("answerer")
+                        rankList.add(Rank(i, jsonObj_user.getString("nickname"), jsonObj.getInt("score")))
                     }
+                    Log.d("Mypage_Activity", rankList.toString())
+                    Log.d("Mypage_Activity", response.toString())
 
                     // response rv에 띄우기
                     Mypage_Control().show_Rank(context)
@@ -155,7 +171,7 @@ class MypageActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
             }
-            Log.d("Mypage_Activity", "5")
+            Log.d("Mypage_Activity", "6")
         }
     }
 

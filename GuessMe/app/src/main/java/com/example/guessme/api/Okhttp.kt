@@ -50,6 +50,7 @@ class Okhttp() {
             val builder= Request.Builder()
                 .url(url)
                 .post(RequestBody.create(MediaType.parse("application/json"), jsonbody))
+//                .addHeader("X-AUTH-TOKEN", "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzOSIsInJvbGVzIjpbXSwiaWF0IjoxNTk3NDAwNzgwLCJleHAiOjE1OTc0MDQzODB9.xYc_Va2R9gv5UOjNXcZTMyeVF4hkWDtbPek074LLoh4")
             if(!token.isNullOrEmpty())
                 builder.header("X-AUTH-TOKEN",token!!)
             val request = builder.build()
@@ -57,7 +58,10 @@ class Okhttp() {
             if(!response.header("X-AUTH-TOKEN").isNullOrEmpty())
                 User_Control(context!!)
                     .set_token(response.header("X-AUTH-TOKEN").toString())
-            Log.d("network", "network: "+response.header("X-AUTH-TOKEN"))
+            Log.d("network", "postheader: "+response.header("X-AUTH-TOKEN"))
+            //Log.d("network", "postusertoken: "+User_Control(context!!).set_token(response.header("X-AUTH-TOKEN").toString()))
+            Log.d("network", "postbody: "+jsonbody)
+
             return response.body()!!.string()
 
         }catch (e: IOException){
@@ -65,12 +69,14 @@ class Okhttp() {
         }
     }
 
-    fun DELETE(url: String, jsonbody: String):String{
+    fun DELETE(url: String/*, jsonbody: String*/):String{
         try {
             val builder= Request.Builder()
                 .url(url)
-                .delete(RequestBody.create(MediaType.parse("application/json"), jsonbody))
-            Log.d("Okhttp",jsonbody)
+//                .delete(RequestBody.create(MediaType.parse("application/json"), jsonbody))
+                .delete()
+
+            //Log.d("Okhttp",jsonbody)
             if(!token.isNullOrEmpty())
                 builder.header("X-AUTH-TOKEN",token!!)
 
