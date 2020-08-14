@@ -1,4 +1,4 @@
-package com.example.guessme
+package com.example.guessme.adapters
 
 import android.content.Context
 import android.util.Log
@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.guessme.R
 import com.example.guessme.data.Quiz
 
 
@@ -22,7 +23,7 @@ class SolveQuizAdapter(val context: Context, val solveQuizList : ArrayList<Quiz>
     override fun getItemCount(): Int { return solveQuizList.size }
 
 
-    override fun onBindViewHolder(holder: SolveQuizAdapter.SolveQuizholder, position: Int) {
+    override fun onBindViewHolder(holder: SolveQuizholder, position: Int) {
         holder?.bind(solveQuizList[position], position)
         Log.e("리사이클러뷰 1",solveQuizList[0].toString())
         Log.e("리사이클러뷰 2",solveQuizList[1].toString())

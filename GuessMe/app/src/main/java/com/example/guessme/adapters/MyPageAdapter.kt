@@ -38,7 +38,7 @@ class MyPageAdapter(private val rankList: ArrayList<Rank>) :
     // 위의 onCreateViewHolder에서 만든 view와 실제 입력되는 각각의 데이터를 연결
     override fun onBindViewHolder(holder: MyPageViewHolder, position: Int) {
         holder?.bind(rankList[position], position)
-        Log.e("리사이클러뷰 불러짐","성공")
+        Log.d("리사이클러뷰 불러짐","성공")
     }
 
     //  RecyclerView로 만들어지는 item의 총 개수를 반환
