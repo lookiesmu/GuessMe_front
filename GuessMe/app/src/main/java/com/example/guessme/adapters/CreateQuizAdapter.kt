@@ -30,6 +30,7 @@ class CreateQuizAdapter(private val quizList: ArrayList<Quiz>) :
                 qContent?.setText(quiz.content)
             }
 
+            quiz.answer=-1
             // O 버튼 클릭 리스너
             iv_yes.setOnClickListener{
                 //answer=1로 바꾸기(yes활성화)

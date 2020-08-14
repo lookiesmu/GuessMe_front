@@ -19,7 +19,6 @@
         </activity>
         <activity android:name=".CreateQuizActivity"></activity>
         <activity android:name=".MypageActivity"></activity>
-        <activity android:name=".ReadRankActivity"></activity>
         <activity android:name=".SignUpActivity"></activity>
         <activity android:name=".SolveQuizActivity"></activity>
         <activity android:name=".SearchQuizActivity"></activity>

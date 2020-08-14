@@ -54,7 +54,7 @@ class CreateQuizActivity : AppCompatActivity() {
 
         }
 
-        // 퀴즈 생성
+        // 퀴즈 생성 post
         fun POST_CreateQuiz(){
             val url = getString(R.string.server_url) + "/quizzes"
             val jsonObj = JSONObject()
@@ -64,7 +64,7 @@ class CreateQuizActivity : AppCompatActivity() {
                 jsonObj.put("content",createQuizList[i].content)
                 jsonObj.put("answer",createQuizList[i].answer)
 
-                Log.d("postpost",jsonObj.toString())
+                //Log.d("postpost",jsonObj.toString())
                 jsonArr.put(jsonObj)
             }
             asynctask().execute("1", url, jsonArr.toString())
