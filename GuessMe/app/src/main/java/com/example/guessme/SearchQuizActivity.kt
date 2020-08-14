@@ -61,6 +61,7 @@ class SearchQuizActivity : AppCompatActivity() {
 
     inner class asynctask : AsyncTask<String, Void, String>(){
         var state: Int = -1 //state == 0 : GET_퀴즈찾기, state == 1 : GET_해당유저의퀴즈찾기
+
         override fun doInBackground(vararg params: String): String {
             state = Integer.parseInt(params[0])
             val url = params[1]
