@@ -21,7 +21,6 @@ class SolveQuizActivity : AppCompatActivity() {
 
     val solve_quiz_list: ArrayList<Quiz> = arrayListOf() //퀴즈 리스트 담을 배열 생성
     val my_answer_list: ArrayList<Int> = arrayListOf(-1,-1,-1,-1,-1) //퀴즈에 대한 유저의 정답 리스트(초기값 : -1)
-//    val rankList: ArrayList<Rank> = arrayListOf() // 퀴즈 푼 적이 있는 지 검사
     var nickname:String =""
 
 
@@ -47,17 +46,13 @@ class SolveQuizActivity : AppCompatActivity() {
             asynctask().execute("1",url,score)
         }
 
-//        fun GET_RANK(){
-//            // 퀴즈 푼 적 있는지 검사
-//            val url = getString(R.string.server_url) + "/users/rank"
-//            asynctask().execute("2",url)
-//        }
 
     }
 
     inner class asynctask : AsyncTask<String, Void, String>(){
         // state = 1 -> GET : 퀴즈 조회 | 2 -> POST : 점수 전송
         var state:Int = -1
+        var score:String = ""
 
         override fun doInBackground(vararg params: String): String {
             state = Integer.parseInt(params[0])
@@ -69,13 +64,10 @@ class SolveQuizActivity : AppCompatActivity() {
                     return Okhttp(applicationContext).GET(url)
                 }
                 1->{
-                    val score = params[2]
+                    score = params[2]
                     Log.d("score 넘어옴 :",score)
                     return Okhttp(applicationContext).POST(url,Json().submitScore(score))
                 }
-//                2->{
-//                    Log.d("랭크 불러오기 :","try")
-//                    return Okhttp(applicationContext).GET(url)
 //                }
             }
 
@@ -122,29 +114,22 @@ class SolveQuizActivity : AppCompatActivity() {
                 }
 
                 1 ->{
-//                    val jsonObj = JSONObject(response) // 에러여도 여기까진 가능
+                    val jsonObj = JSONObject(response) // 에러여도 여기까진 가능
+                    Log.d("jsonObj",jsonObj.toString())
 
-                    try {
-//                        val jsonObj_embedded = jsonObj.getJSONObject("_embedded")
-//                        val jsonQuizAry = jsonObj_embedded.getJSONArray("quizList")
+                    if (jsonObj.toString() == "{}") {
                         Log.d("포스트 잘 됨","score")
-                    }catch (e:Exception){
-                        Log.d("포스트 안 됨","score")
-                        Toast.makeText(applicationContext,"이미 제출한 퀴즈입니다.",Toast.LENGTH_SHORT).show()
+                        val text = score+"점"
+                        val dlg = ScoreDialog(this@SolveQuizActivity)
+                        dlg.start(text)
+                    }
+                    else{
+                        val str = jsonObj.getString("msg");
+                        Log.d("포스트 안 됨", "score")
+                        Toast.makeText(applicationContext, "이미 제출한 퀴즈입니다.", Toast.LENGTH_SHORT).show()
                     }
                 }
 
-//                2 ->{
-//                    val jsonObj = JSONObject(response) // 에러여도 여기까진 가능
-//
-//                    try {
-//                        val jsonObj_embedded = jsonObj.getJSONObject("_embedded")
-//                        val jsonQuizAry = jsonObj_embedded.getJSONArray("quizList")
-//
-//                    }catch (e:Exception){
-//
-//                    }
-//                }
             }
 
 
@@ -175,17 +160,17 @@ class SolveQuizActivity : AppCompatActivity() {
                     val mark = ComputeGrade()
                     Log.d("마이그레이드굿굿",mark.toString())
 
-                    // mark를 dialog에 띄우기
-                    val text = mark.toString()+"점"
-                    val dlg = ScoreDialog(this)
-//                    dlg.setOnOKClickedListener{
-//                    }
-                    dlg.start(text)
-
                     // mark를 서버에 POST username, score 점수 반환
+                    // user 이름이 이미 랭크에 있을 경우 Toast 로 이미 제출한 퀴즈입니다 띄우기
                     Solve_Control().POST_SCORE(nickname,mark.toString())
 
-                    // user 이름이 이미 랭크에 있을 경우 Toast 로 이미 제출한 퀴즈입니다 띄우기
+                    // mark를 dialog에 띄우기
+//                    val text = mark.toString()+"점"
+//                    val dlg = ScoreDialog(this)
+//                    dlg.start(text)
+//                    dlg.setOnOKClickedListener{
+//                    }
+
                 }
 
             }
