@@ -72,7 +72,7 @@ class MypageActivity : AppCompatActivity() {
 
         // response rv에 띄우기
         fun show_Rank(context: Context){
-            Log.d("Mypage_Activity", "6")
+            Log.d("Mypage_Activity", "5")
             viewManager = LinearLayoutManager(context)
             viewAdapter = MyPageAdapter(rankList)
 
@@ -149,6 +149,8 @@ class MypageActivity : AppCompatActivity() {
                         var jsonObj_user = jsonObj.getJSONObject("answerer")
                         rankList.add(Rank(i, jsonObj_user.getString("nickname"), jsonObj.getInt("score")))
                     }
+                    Log.d("Mypage_Activity", rankList.toString())
+                    Log.d("Mypage_Activity", response.toString())
 
                     // response rv에 띄우기
                     Mypage_Control().show_Rank(context)
@@ -159,7 +161,7 @@ class MypageActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
             }
-            Log.d("Mypage_Activity", "5")
+            Log.d("Mypage_Activity", "6")
         }
     }
 
