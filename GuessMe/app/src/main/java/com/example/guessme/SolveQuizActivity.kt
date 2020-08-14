@@ -10,18 +10,20 @@ import com.example.guessme.adapters.SolveQuizAdapter
 import com.example.guessme.api.Json
 import com.example.guessme.api.Okhttp
 import com.example.guessme.data.Quiz
+import com.example.guessme.data.Rank
+import com.example.guessme.util.Constants
 import kotlinx.android.synthetic.main.activity_solve_quiz.*
 import org.json.JSONObject
+import java.lang.Exception
 
 class SolveQuizActivity : AppCompatActivity() {
 
 
     val solve_quiz_list: ArrayList<Quiz> = arrayListOf() //퀴즈 리스트 담을 배열 생성
     val my_answer_list: ArrayList<Int> = arrayListOf(-1,-1,-1,-1,-1) //퀴즈에 대한 유저의 정답 리스트(초기값 : -1)
+//    val rankList: ArrayList<Rank> = arrayListOf() // 퀴즈 푼 적이 있는 지 검사
     var nickname:String =""
 
-
-    lateinit var solve_adapter : SolveQuizAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +47,12 @@ class SolveQuizActivity : AppCompatActivity() {
             asynctask().execute("1",url,score)
         }
 
+//        fun GET_RANK(){
+//            // 퀴즈 푼 적 있는지 검사
+//            val url = getString(R.string.server_url) + "/users/rank"
+//            asynctask().execute("2",url)
+//        }
+
     }
 
     inner class asynctask : AsyncTask<String, Void, String>(){
@@ -57,14 +65,18 @@ class SolveQuizActivity : AppCompatActivity() {
 
             when(state){
                 0->{
-                    Log.d("score","score")
+                    Log.d("퀴즈 불러오기 :","try")
                     return Okhttp(applicationContext).GET(url)
                 }
                 1->{
                     val score = params[2]
-                    Log.d("score",score)
+                    Log.d("score 넘어옴 :",score)
                     return Okhttp(applicationContext).POST(url,Json().submitScore(score))
                 }
+//                2->{
+//                    Log.d("랭크 불러오기 :","try")
+//                    return Okhttp(applicationContext).GET(url)
+//                }
             }
 
             return Okhttp(applicationContext).GET(url)
@@ -78,12 +90,15 @@ class SolveQuizActivity : AppCompatActivity() {
                 Log.d("Solve_Activity", "null in")
                 return
             }
+
             Log.d("Solve_Activity",response)
+
             if(!Json().isJson(response)){
                 Log.d("퀴즈 입력 통신 에러", response)
                 Toast.makeText(applicationContext,"네트워크 통신 오류",Toast.LENGTH_SHORT).show()
                 return
             }
+
             when(state) {
 
                 0 -> {
@@ -107,9 +122,29 @@ class SolveQuizActivity : AppCompatActivity() {
                 }
 
                 1 ->{
-                    Log.d("포스트 잘 됨","post")
-                    //when post
+//                    val jsonObj = JSONObject(response) // 에러여도 여기까진 가능
+
+                    try {
+//                        val jsonObj_embedded = jsonObj.getJSONObject("_embedded")
+//                        val jsonQuizAry = jsonObj_embedded.getJSONArray("quizList")
+                        Log.d("포스트 잘 됨","score")
+                    }catch (e:Exception){
+                        Log.d("포스트 안 됨","score")
+                        Toast.makeText(applicationContext,"이미 제출한 퀴즈입니다.",Toast.LENGTH_SHORT).show()
+                    }
                 }
+
+//                2 ->{
+//                    val jsonObj = JSONObject(response) // 에러여도 여기까진 가능
+//
+//                    try {
+//                        val jsonObj_embedded = jsonObj.getJSONObject("_embedded")
+//                        val jsonQuizAry = jsonObj_embedded.getJSONArray("quizList")
+//
+//                    }catch (e:Exception){
+//
+//                    }
+//                }
             }
 
 
@@ -121,7 +156,7 @@ class SolveQuizActivity : AppCompatActivity() {
 
         var grade = 0
 
-        for (i in 0 until solve_quiz_list.size){
+        for (i in 0 until my_answer_list.size){
             if (my_answer_list[i] == solve_quiz_list.get(i).answer)
                 grade += 20
         }
@@ -133,6 +168,7 @@ class SolveQuizActivity : AppCompatActivity() {
         when(view.id){
             R.id.btn_solve_quiz ->{
                 Log.d("마이앤썰리스트굿굿",my_answer_list.toString())
+
                 if (-1 in my_answer_list)
                     Toast.makeText(applicationContext, "퀴즈 항목을 모두 입력하세요.", Toast.LENGTH_SHORT).show()
                 else{
@@ -151,6 +187,7 @@ class SolveQuizActivity : AppCompatActivity() {
 
                     // user 이름이 이미 랭크에 있을 경우 Toast 로 이미 제출한 퀴즈입니다 띄우기
                 }
+
             }
         }
     }
