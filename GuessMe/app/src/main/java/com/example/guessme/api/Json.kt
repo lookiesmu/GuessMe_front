@@ -2,9 +2,6 @@ package com.example.guessme.api
 
 
 import android.util.Log
-import com.example.guessme.data.Quiz
-import com.example.guessme.data.QuizList
-import com.example.guessme.data.User
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -36,26 +33,9 @@ class Json() {
         return true
     }
     fun createQuiz(quizList: String): String{
-        // string -> QuizList
-            // 요 부분 일단 보류
-        // 제이슨 리스트로 저장
-            // 요 방식으로 잘 되는지 확인할 것!
-
-        Log.d("Jsonaaaaaaaa",quizList)
-        for (i in 0 until quizList.length){
-            i
-        }
         var jsonArr = JSONArray(quizList)
-        Log.d("Jsonaaaaaaaa",jsonArr.toString())
+        //Log.d("network",jsonArr.toString())
 
         return jsonArr.toString()
     }
-
-
-    fun deleteQuiz(): String {
-        // 삭제할 때 뭐 보내는지 물어보기!
-        return ""
-    }
-
-
 }
