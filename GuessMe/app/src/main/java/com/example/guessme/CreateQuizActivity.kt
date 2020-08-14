@@ -31,9 +31,7 @@ class CreateQuizActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_quiz)
-        val username = User_Control(applicationContext).get_user()
 
-        Log.d("윤한",username.nickname)
 
         // 닉네임 타이틀에 출력
         val username = User_Control(applicationContext).get_user().nickname
