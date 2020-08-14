@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.guessme.adapters.CreateQuizAdapter
 import com.example.guessme.api.Json
 import com.example.guessme.api.Okhttp
+import com.example.guessme.api.User_Control
 import com.example.guessme.data.Quiz
 import com.example.guessme.util.Constants.Companion.BASE_URL
 import kotlinx.android.synthetic.main.activity_create_quiz.*
@@ -142,7 +143,7 @@ class CreateQuizActivity : AppCompatActivity() {
                 1 -> {
                      var quizList = params[2]
 
-                    response = Okhttp().POST(url, Json()
+                    response = Okhttp(applicationContext).POST(url, Json()
                         .createQuiz(quizList))
                 }
             }

@@ -10,8 +10,11 @@ import com.example.guessme.adapters.SolveQuizAdapter
 import com.example.guessme.api.Json
 import com.example.guessme.api.Okhttp
 import com.example.guessme.data.Quiz
+import com.example.guessme.data.Rank
+import com.example.guessme.util.Constants
 import kotlinx.android.synthetic.main.activity_solve_quiz.*
 import org.json.JSONObject
+import java.lang.Exception
 
 class SolveQuizActivity : AppCompatActivity() {
 
@@ -20,8 +23,6 @@ class SolveQuizActivity : AppCompatActivity() {
     val my_answer_list: ArrayList<Int> = arrayListOf(-1,-1,-1,-1,-1) //퀴즈에 대한 유저의 정답 리스트(초기값 : -1)
     var nickname:String =""
 
-
-    lateinit var solve_adapter : SolveQuizAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,11 +46,13 @@ class SolveQuizActivity : AppCompatActivity() {
             asynctask().execute("1",url,score)
         }
 
+
     }
 
     inner class asynctask : AsyncTask<String, Void, String>(){
         // state = 1 -> GET : 퀴즈 조회 | 2 -> POST : 점수 전송
         var state:Int = -1
+        var score:String = ""
 
         override fun doInBackground(vararg params: String): String {
             state = Integer.parseInt(params[0])
@@ -57,14 +60,15 @@ class SolveQuizActivity : AppCompatActivity() {
 
             when(state){
                 0->{
-                    Log.d("score","score")
+                    Log.d("퀴즈 불러오기 :","try")
                     return Okhttp(applicationContext).GET(url)
                 }
                 1->{
-                    val score = params[2]
-                    Log.d("score",score)
+                    score = params[2]
+                    Log.d("score 넘어옴 :",score)
                     return Okhttp(applicationContext).POST(url,Json().submitScore(score))
                 }
+//                }
             }
 
             return Okhttp(applicationContext).GET(url)
@@ -78,12 +82,15 @@ class SolveQuizActivity : AppCompatActivity() {
                 Log.d("Solve_Activity", "null in")
                 return
             }
+
             Log.d("Solve_Activity",response)
+
             if(!Json().isJson(response)){
                 Log.d("퀴즈 입력 통신 에러", response)
                 Toast.makeText(applicationContext,"네트워크 통신 오류",Toast.LENGTH_SHORT).show()
                 return
             }
+
             when(state) {
 
                 0 -> {
@@ -107,9 +114,22 @@ class SolveQuizActivity : AppCompatActivity() {
                 }
 
                 1 ->{
-                    Log.d("포스트 잘 됨","post")
-                    //when post
+                    val jsonObj = JSONObject(response) // 에러여도 여기까진 가능
+                    Log.d("jsonObj",jsonObj.toString())
+
+                    if (jsonObj.toString() == "{}") {
+                        Log.d("포스트 잘 됨","score")
+                        val text = score+"점"
+                        val dlg = ScoreDialog(this@SolveQuizActivity)
+                        dlg.start(text)
+                    }
+                    else{
+                        val str = jsonObj.getString("msg");
+                        Log.d("포스트 안 됨", "score")
+                        Toast.makeText(applicationContext, "이미 제출한 퀴즈입니다.", Toast.LENGTH_SHORT).show()
+                    }
                 }
+
             }
 
 
@@ -121,7 +141,7 @@ class SolveQuizActivity : AppCompatActivity() {
 
         var grade = 0
 
-        for (i in 0 until solve_quiz_list.size){
+        for (i in 0 until my_answer_list.size){
             if (my_answer_list[i] == solve_quiz_list.get(i).answer)
                 grade += 20
         }
@@ -133,24 +153,26 @@ class SolveQuizActivity : AppCompatActivity() {
         when(view.id){
             R.id.btn_solve_quiz ->{
                 Log.d("마이앤썰리스트굿굿",my_answer_list.toString())
+
                 if (-1 in my_answer_list)
                     Toast.makeText(applicationContext, "퀴즈 항목을 모두 입력하세요.", Toast.LENGTH_SHORT).show()
                 else{
                     val mark = ComputeGrade()
                     Log.d("마이그레이드굿굿",mark.toString())
 
-                    // mark를 dialog에 띄우기
-                    val text = mark.toString()+"점"
-                    val dlg = ScoreDialog(this)
-//                    dlg.setOnOKClickedListener{
-//                    }
-                    dlg.start(text)
-
                     // mark를 서버에 POST username, score 점수 반환
+                    // user 이름이 이미 랭크에 있을 경우 Toast 로 이미 제출한 퀴즈입니다 띄우기
                     Solve_Control().POST_SCORE(nickname,mark.toString())
 
-                    // user 이름이 이미 랭크에 있을 경우 Toast 로 이미 제출한 퀴즈입니다 띄우기
+                    // mark를 dialog에 띄우기
+//                    val text = mark.toString()+"점"
+//                    val dlg = ScoreDialog(this)
+//                    dlg.start(text)
+//                    dlg.setOnOKClickedListener{
+//                    }
+
                 }
+
             }
         }
     }

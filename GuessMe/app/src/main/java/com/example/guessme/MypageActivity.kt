@@ -16,8 +16,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.guessme.adapters.MyPageAdapter
 import com.example.guessme.api.Json
 import com.example.guessme.api.Okhttp
+import com.example.guessme.api.User_Control
 import com.example.guessme.data.Rank
 import com.example.guessme.util.Constants
+import kotlinx.android.synthetic.main.activity_create_quiz.*
+import kotlinx.android.synthetic.main.activity_mypage.*
 import org.json.JSONObject
 
 class MypageActivity : AppCompatActivity() {
@@ -35,6 +38,12 @@ class MypageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mypage)
         Log.d("Mypage_Activity", "1")
+
+        // 닉네임 타이틀에 출력
+        val username = User_Control(applicationContext).get_user().nickname
+        tv_myrank.setText(String.format("%s님의 퀴즈 순위",username))
+
+        // 차트 get
         Mypage_Control().GET_Rank()
     }
 
@@ -108,6 +117,7 @@ class MypageActivity : AppCompatActivity() {
             R.id.btn_solve_quiz_mp -> {        // 퀴즈 생성 완료 버튼
                     val intent = Intent(this, SearchQuizActivity::class.java)
                     startActivity(intent)
+                    finish()
             }
         }
     }
@@ -157,7 +167,7 @@ class MypageActivity : AppCompatActivity() {
                     for (i in 0 until jsonArr.length()) {
                         var jsonObj: JSONObject = jsonArr.getJSONObject(i)
                         var jsonObj_user = jsonObj.getJSONObject("answerer")
-                        rankList.add(Rank(i, jsonObj_user.getString("nickname"), jsonObj.getInt("score")))
+                        rankList.add(Rank(i+1, jsonObj_user.getString("nickname"), jsonObj.getInt("score")))
                     }
                     Log.d("Mypage_Activity", rankList.toString())
                     Log.d("Mypage_Activity", response.toString())

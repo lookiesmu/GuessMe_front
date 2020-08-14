@@ -1,4 +1,4 @@
-package com.example.guessme
+package com.example.guessme.api
 
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
