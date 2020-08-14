@@ -20,9 +20,9 @@ class MyPageAdapter(private val rankList: ArrayList<Rank>) :
         val tv_score = itemView?.findViewById<TextView>(R.id.tv_rank_score)
 
         fun bind (rank: Rank, index : Int) {
-            tv_idx.setText(rank.index)
+            tv_idx.setText(rank.index.toString())
             tv_nickname.setText(rank.nickname)
-            tv_score.setText(rank.score)
+            tv_score.setText(rank.score.toString())
         }
     }
 
