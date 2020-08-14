@@ -30,32 +30,42 @@ class CreateQuizAdapter(private val quizList: ArrayList<Quiz>) :
                 qContent?.setText(quiz.content)
             }
 
-            quiz.answer=-1
+            fun setYes(){
+                iv_yes.setImageResource(R.drawable.img_o_act)
+                iv_no.setImageResource(R.drawable.img_x_not)
+                quiz.answer = 1
+            }
+
+            fun setNo(){
+                iv_yes.setImageResource(R.drawable.img_o)
+                iv_no.setImageResource(R.drawable.img_x)
+                quiz.answer = 0
+            }
+
+
+            fun clearYesNo(){
+                iv_yes.setImageResource(R.drawable.img_o)
+                iv_no.setImageResource(R.drawable.img_x_not)
+                quiz.answer = -1
+            }
+            // 서버로부터 처음받을 때는 모두 answer=0 되어있으니 clear
+            clearYesNo()
+
             // O 버튼 클릭 리스너
             iv_yes.setOnClickListener{
-                //answer=1로 바꾸기(yes활성화)
-                if(quiz.answer != 1){
-                    iv_yes.setImageResource(R.drawable.img_o_act)
-                    iv_no.setImageResource(R.drawable.img_x_not)
-                    quiz.answer = 1
-                } else{     // yes를 비활성화
-                    iv_yes.setImageResource(R.drawable.img_o)
-                    quiz.answer = -1
-
+                if (quiz.answer == 1){  // O 클릭 해제
+                    clearYesNo()
+                } else{
+                    setYes()
                 }
             }
             // X 버튼 클릭 리스너
             iv_no.setOnClickListener{
-                ///answer=0로 바꾸기(no활성화)
-                if(quiz.answer != 0){
-                    iv_no.setImageResource(R.drawable.img_x)
-                    iv_yes.setImageResource(R.drawable.img_o)
-                    quiz.answer = 1
-                } else{     // no 비활성화
-                    iv_no.setImageResource(R.drawable.img_x_not)
-                    quiz.answer = -1
+                if (quiz.answer == 0){  // X 클릭 해제
+                    clearYesNo()
+                } else{
+                    setNo()
                 }
-
             }
         }
     }

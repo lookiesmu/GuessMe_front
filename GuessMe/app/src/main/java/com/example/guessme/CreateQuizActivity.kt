@@ -57,15 +57,17 @@ class CreateQuizActivity : AppCompatActivity() {
         // 퀴즈 생성 post
         fun POST_CreateQuiz(){
             val url = getString(R.string.server_url) + "/quizzes"
-            val jsonObj = JSONObject()
-            val jsonArr = JSONArray()
+            var jsonArr = JSONArray()
             for (i in 0 until createQuizList.size) {
+                val jsonObj = JSONObject()
                 jsonObj.put("quizId",createQuizList[i].quizId)
                 jsonObj.put("content",createQuizList[i].content)
                 jsonObj.put("answer",createQuizList[i].answer)
 
-                //Log.d("postpost",jsonObj.toString())
+                Log.d("postobj",jsonObj.toString())
+
                 jsonArr.put(jsonObj)
+                Log.d("postarr",jsonArr.toString())
             }
             asynctask().execute("1", url, jsonArr.toString())
         }
@@ -142,7 +144,6 @@ class CreateQuizActivity : AppCompatActivity() {
 
                     response = Okhttp().POST(url, Json()
                         .createQuiz(quizList))
-
                 }
             }
             return response
@@ -160,7 +161,6 @@ class CreateQuizActivity : AppCompatActivity() {
                 return
             }
             //Log.d("CreateQuiz_Activity",response)
-
             val jsonObj = JSONObject(response)
             when (state) {
                 0 -> {
@@ -178,7 +178,13 @@ class CreateQuizActivity : AppCompatActivity() {
 
                 }
                 1 -> {
-                    Toast.makeText(applicationContext, "성공적으로 퀴즈를 생성했습니다!", Toast.LENGTH_SHORT).show()
+                    Log.d("CreateQuiz_Activity",response)
+                    if(response=="{}"){
+                        Toast.makeText(applicationContext, "성공적으로 퀴즈를 생성했습니다!", Toast.LENGTH_SHORT).show()
+                    } else{
+                        Toast.makeText(applicationContext, "퀴즈 생성에 실패했습니다.", Toast.LENGTH_SHORT).show()
+
+                    }
                 }
             }
         }
