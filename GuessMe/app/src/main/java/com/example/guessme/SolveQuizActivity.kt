@@ -18,7 +18,7 @@ class SolveQuizActivity : AppCompatActivity() {
 
     val solve_quiz_list: ArrayList<Quiz> = arrayListOf() //퀴즈 리스트 담을 배열 생성
     val my_answer_list: ArrayList<Int> = arrayListOf(-1,-1,-1,-1,-1) //퀴즈에 대한 유저의 정답 리스트(초기값 : -1)
-
+    var nickname:String =""
 
 
     lateinit var solve_adapter : SolveQuizAdapter
@@ -27,10 +27,9 @@ class SolveQuizActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_solve_quiz)
 
-        val nickname = intent.getStringExtra("nickname")
+        nickname = intent.getStringExtra("nickname")
         tv_solve_quiz.setText(String.format("%s님의 퀴즈를 풀어보세요!",nickname))
         Solve_Control().GET_QUIZ(nickname)
-
     }
 
     inner class Solve_Control(){
@@ -38,16 +37,27 @@ class SolveQuizActivity : AppCompatActivity() {
         //닉네임에 해당하는 퀴즈 바로 받아오기
         fun GET_QUIZ(nickname : String) {
             val url = getString(R.string.server_url) + "/quizzes/" + nickname
-            asynctask().execute(url)
+            asynctask().execute("0",url)
+        }
+
+        fun POST_SCORE(nickname: String, score: String){
+            val url = getString(R.string.server_url) + "/quizzes/" + nickname
+            asynctask().execute("1",url,score)
         }
 
     }
 
     inner class asynctask : AsyncTask<String, Void, String>(){
 
+        var state:Int = -1
 
         override fun doInBackground(vararg params: String): String {
-            val url = params[0]
+            state = Integer.parseInt(params[0])
+            val url = params[1]
+            if (state>0) {
+                val score = params[2]
+            }
+            Log.d("score","score")
             return Okhttp(applicationContext).GET(url)
         }
 
@@ -65,18 +75,33 @@ class SolveQuizActivity : AppCompatActivity() {
                 Toast.makeText(applicationContext,"네트워크 통신 오류",Toast.LENGTH_SHORT).show()
                 return
             }
+            when(state) {
 
-            val jsonObj = JSONObject(response) // 객체 전체 응답 받아오기
-            val jsonObj_embedded = jsonObj.getJSONObject("_embedded") //특정 객체 받아오기
-            val jsonQuizAry = jsonObj_embedded.getJSONArray("quizList") //특정 배열 받아오기
+                0 -> {
+                    val jsonObj = JSONObject(response) // 객체 전체 응답 받아오기
+                    val jsonObj_embedded = jsonObj.getJSONObject("_embedded") //특정 객체 받아오기
+                    val jsonQuizAry = jsonObj_embedded.getJSONArray("quizList") //특정 배열 받아오기
 
-            for (i in 0 until jsonQuizAry.length()) {
-                val json_ojt: JSONObject = jsonQuizAry.getJSONObject(i)
-                solve_quiz_list.add(Quiz(json_ojt.getInt("quizId"),json_ojt.getString("content"), json_ojt.getInt("answer")))
+                    for (i in 0 until jsonQuizAry.length()) {
+                        val json_ojt: JSONObject = jsonQuizAry.getJSONObject(i)
+                        solve_quiz_list.add(
+                            Quiz(
+                                json_ojt.getInt("quizId"),
+                                json_ojt.getString("content"),
+                                json_ojt.getInt("answer")
+                            )
+                        )
+                    }
+
+                    rv_solve_quiz.adapter =
+                        SolveQuizAdapter(this@SolveQuizActivity, solve_quiz_list, my_answer_list)
+                }
+
+                1 ->{
+                    Log.d("포스트 잘 됨","post")
+                    //when post
+                }
             }
-
-            rv_solve_quiz.adapter = SolveQuizAdapter(this@SolveQuizActivity, solve_quiz_list, my_answer_list)
-
         }
 
     }
@@ -111,6 +136,8 @@ class SolveQuizActivity : AppCompatActivity() {
                     dlg.start(text)
 
                     // mark를 서버에 POST username, score 점수 반환
+                    Solve_Control().POST_SCORE(nickname,mark.toString())
+
                     // user 이름이 이미 랭크에 있을 경우 Toast 로 이미 제출한 퀴즈입니다 띄우기
                 }
             }
