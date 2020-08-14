@@ -23,7 +23,6 @@ class Okhttp() {
     constructor(context : Context) : this(){
         this.context = context
         token = User_Control(context).get_token()
-        //Log.d()
     }
 
     fun GET(url: String):String{
@@ -52,8 +51,10 @@ class Okhttp() {
                 .post(RequestBody.create(MediaType.parse("application/json"), jsonbody))
                 .addHeader("Content-Type", "application/json")
 //                .addHeader("X-AUTH-TOKEN", "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzOSIsInJvbGVzIjpbXSwiaWF0IjoxNTk3NDAwNzgwLCJleHAiOjE1OTc0MDQzODB9.xYc_Va2R9gv5UOjNXcZTMyeVF4hkWDtbPek074LLoh4")
+            Log.d("network","tok2: "+ token)
             if(!token.isNullOrEmpty())
                 builder.header("X-AUTH-TOKEN",token!!)
+            Log.d("network","tok3: "+ token)
             val request = builder.build()
             if(!request.header("X-AUTH-TOKEN").isNullOrEmpty())
                 User_Control(context!!)
@@ -63,9 +64,6 @@ class Okhttp() {
                 User_Control(context!!)
                     .set_token(response.header("X-AUTH-TOKEN").toString())
             //token=response.header("X-AUTH-TOKEN").toString()
-            Log.d("network", "postheader: "+request.header("X-AUTH-TOKEN"))
-            //Log.d("network", "postusertoken: "+User_Control(context!!).set_token(response.header("X-AUTH-TOKEN").toString()))
-            Log.d("network", "postbody: "+jsonbody)
 
             return response.body()!!.string()
 
