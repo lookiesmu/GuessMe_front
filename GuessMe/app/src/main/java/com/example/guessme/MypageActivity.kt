@@ -117,6 +117,7 @@ class MypageActivity : AppCompatActivity() {
             R.id.btn_solve_quiz_mp -> {        // 퀴즈 생성 완료 버튼
                     val intent = Intent(this, SearchQuizActivity::class.java)
                     startActivity(intent)
+                    finish()
             }
         }
     }
