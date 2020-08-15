@@ -64,8 +64,8 @@
         android:id="@+id/frameLayout_rv"
         android:layout_width="match_parent"
         android:layout_height="350dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@id/btn_solve_quiz"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -80,9 +80,8 @@
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
             app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
-            tools:listitem="@layout/list_item_solve_quiz"
             tools:context="M"
-            />
+            tools:listitem="@layout/list_item_solve_quiz" />
     </ScrollView>
 
 

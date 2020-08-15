@@ -150,4 +150,9 @@ class SearchQuizActivity : AppCompatActivity() {
         super.onPause()
     }
 
+    override fun onBackPressed() {
+        Log.d("finish","finish")
+        this@SearchQuizActivity.finish()
+    }
+
 }
