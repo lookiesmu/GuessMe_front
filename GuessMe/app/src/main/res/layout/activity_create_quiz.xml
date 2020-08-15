@@ -18,7 +18,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_create_quiz"
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="350dp"
             android:clipToPadding="false"
             android:layout_gravity="center"
             android:paddingStart="20dp"

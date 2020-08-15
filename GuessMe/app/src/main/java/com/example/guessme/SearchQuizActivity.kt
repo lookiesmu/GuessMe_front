@@ -97,6 +97,7 @@ class SearchQuizActivity : AppCompatActivity() {
                     1 -> {
                         val intent = Intent(this@SearchQuizActivity, MypageActivity::class.java)
                         startActivity(intent)
+                        this@SearchQuizActivity.finish()
                     }
                 }
 
