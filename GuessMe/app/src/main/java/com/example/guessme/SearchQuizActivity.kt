@@ -97,6 +97,7 @@ class SearchQuizActivity : AppCompatActivity() {
                     1 -> {
                         val intent = Intent(this@SearchQuizActivity, MypageActivity::class.java)
                         startActivity(intent)
+                        this@SearchQuizActivity.finish()
                     }
                 }
 
@@ -148,6 +149,11 @@ class SearchQuizActivity : AppCompatActivity() {
     override fun onPause() {
         asynctask().cancel(true)
         super.onPause()
+    }
+
+    override fun onBackPressed() {
+        Log.d("finish","finish")
+        this@SearchQuizActivity.finish()
     }
 
 }
