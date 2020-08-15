@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools">
 
+
     <FrameLayout
         android:id="@+id/frameLayout_title"
         android:layout_width="match_parent"
@@ -19,7 +20,7 @@
         android:id="@+id/tv_cq_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="이땡님의 퀴즈를 만들어 보세요!"
+        android:text=""
         android:layout_marginTop="30dp"
         android:gravity="center"
         android:textColor="#FFFFFF"
@@ -51,6 +52,7 @@
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:clickable="true"
+        android:onClick="CreateQuiz_Click_Listener"
         android:src="@drawable/btn_create_real"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

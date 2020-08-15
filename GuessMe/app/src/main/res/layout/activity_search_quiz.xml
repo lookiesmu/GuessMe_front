@@ -38,7 +38,7 @@
             app:layout_constraintVertical_bias="0.99"
             android:textSize="15dp"/>
 
-        <androidx.appcompat.widget.AppCompatEditText
+        <EditText
             android:id="@+id/sq_et_nickname"
             android:padding="10dp"
             android:hint="Search"
@@ -78,7 +78,7 @@
 
 
         <ImageButton
-            android:id="@+id/btn_solve_quiz"
+            android:id="@+id/btn_search_quiz"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintHorizontal_chainStyle="packed"
@@ -92,9 +92,10 @@
             android:id="@+id/btn_mypage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="SearchQuiz_Click_Listener"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintLeft_toRightOf="@+id/btn_solve_quiz"
+            app:layout_constraintLeft_toRightOf="@+id/btn_search_quiz"
             android:src="@drawable/btn_mypage"
             android:background="#00FFFFFF"/>
 

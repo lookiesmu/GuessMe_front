@@ -3,7 +3,6 @@ package com.example.guessme.api
 
 import android.content.Context
 import android.util.Log
-import com.example.guessme.User_Control
 import okhttp3.*
 import java.io.IOException
 import java.util.concurrent.TimeUnit
@@ -30,12 +29,16 @@ class Okhttp() {
         try {
             val builder= Request.Builder()
                 .url(url)
+                .addHeader("Content-Type", "application/json")
+//                .addHeader("X-AUTH-TOKEN", "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzIiwicm9sZXMiOltdLCJpYXQiOjE1OTcyNDk2ODgsImV4cCI6MTU5NzI1MzI4OH0.TaLOPZ2o3ec58I9EAGa99_gBkqHjpuboQG6m_6yeC9c")
                 .get()
             if(!token.isNullOrEmpty())
-                builder.header("Authorization", token!!)
+                builder.header("X-AUTH-TOKEN",token!!)
             val request = builder.build()
             var response : Response = client.newCall(request).execute()
+            Log.d("networ", url)
             return response.body()!!.string()
+
         }catch (e: IOException){
             return e.toString()
         }
@@ -46,27 +49,39 @@ class Okhttp() {
             val builder= Request.Builder()
                 .url(url)
                 .post(RequestBody.create(MediaType.parse("application/json"), jsonbody))
+                .addHeader("Content-Type", "application/json")
+//                .addHeader("X-AUTH-TOKEN", "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzOSIsInJvbGVzIjpbXSwiaWF0IjoxNTk3NDAwNzgwLCJleHAiOjE1OTc0MDQzODB9.xYc_Va2R9gv5UOjNXcZTMyeVF4hkWDtbPek074LLoh4")
+            Log.d("network","tok2: "+ token)
             if(!token.isNullOrEmpty())
-                builder.header("Authorization",token!!)
+                builder.header("X-AUTH-TOKEN",token!!)
+            Log.d("network","tok3: "+ token)
             val request = builder.build()
-            response = client.newCall(request).execute()
-            if(!response.header("Authorization").isNullOrEmpty())
+            if(!request.header("X-AUTH-TOKEN").isNullOrEmpty())
                 User_Control(context!!)
-                    .set_token(response.header("Authorization").toString())
+                    .set_token(request.header("X-AUTH-TOKEN").toString())
+            response = client.newCall(request).execute()
+            if(!response.header("X-AUTH-TOKEN").isNullOrEmpty())
+                User_Control(context!!)
+                    .set_token(response.header("X-AUTH-TOKEN").toString())
+            //token=response.header("X-AUTH-TOKEN").toString()
+
             return response.body()!!.string()
+
         }catch (e: IOException){
             return e.toString()
         }
     }
 
-    fun DELETE(url: String, jsonbody: String):String{
+    fun DELETE(url: String/*, jsonbody: String*/):String{
         try {
             val builder= Request.Builder()
                 .url(url)
-                .delete(RequestBody.create(MediaType.parse("application/json"), jsonbody))
-            Log.d("Okhttp",jsonbody)
+//                .delete(RequestBody.create(MediaType.parse("application/json"), jsonbody))
+                .delete()
+
+            //Log.d("Okhttp",jsonbody)
             if(!token.isNullOrEmpty())
-                builder.header("Authorization",token!!)
+                builder.header("X-AUTH-TOKEN",token!!)
 
             val request = builder.build()
             var response : Response = client.newCall(request).execute()
@@ -82,7 +97,7 @@ class Okhttp() {
                 .url(url)
                 .put(RequestBody.create(MediaType.parse("application/json"), jsonbody))
             if(!token.isNullOrEmpty())
-                builder.header("Authorization",token!!)
+                builder.header("X-AUTH-TOKEN",token!!)
 
             val request = builder.build()
             var response : Response = client.newCall(request).execute()
