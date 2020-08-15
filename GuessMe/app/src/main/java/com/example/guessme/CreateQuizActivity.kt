@@ -16,7 +16,6 @@ import com.example.guessme.api.Okhttp
 import com.example.guessme.api.User_Control
 import com.example.guessme.data.Quiz
 import com.example.guessme.util.Constants
-import com.example.guessme.util.Constants.Companion.BASE_URL
 import kotlinx.android.synthetic.main.activity_create_quiz.*
 import org.json.JSONArray
 import org.json.JSONObject
@@ -107,7 +106,7 @@ class CreateQuizActivity : AppCompatActivity() {
     // 버튼 클릭 리스너
     fun CreateQuiz_Click_Listener(view : View){
         when(view.id){
-            R.id.btn_create_quiz -> {        // 퀴즈 생성 완료 버튼
+            R.id.cl_btn_create_quiz -> {        // 퀴즈 생성 완료 버튼
                 if (CreateQuiz_Control().select_check()) {
                     CreateQuiz_Control().POST_CreateQuiz()
 

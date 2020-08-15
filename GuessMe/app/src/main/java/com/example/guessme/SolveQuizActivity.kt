@@ -1,9 +1,11 @@
 package com.example.guessme
 
+import android.graphics.Color
 import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.Window
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.guessme.adapters.SolveQuizAdapter
