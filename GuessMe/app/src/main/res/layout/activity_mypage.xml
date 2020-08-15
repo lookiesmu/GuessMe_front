@@ -11,7 +11,7 @@
         android:layout_height="70dp"
         app:elevation="0dp"
         android:theme="@style/AppTheme.AppBarOverlay"
-        android:background="#FFFFFF"
+        android:background="@color/colorNotActive"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -27,41 +27,55 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-        <TextView
-            android:id="@+id/tv_myrank"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:textColor="@color/colorPrimaryDark"
-            android:text="하하하"
-            android:textSize="40dp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/appbar_mypage" />
+    <TextView
+        android:id="@+id/tv_myrank"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:text="하하하"
+        android:textSize="40dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/appbar_mypage"
+        app:layout_constraintBottom_toTopOf="@id/ll_rank"/>
 
-        <FrameLayout
-            android:id="@+id/frameLayout"
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/ll_rank"
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/cl_bottom_btn"
+        app:layout_constraintTop_toBottomOf="@id/tv_myrank">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_rank"
             android:layout_width="match_parent"
-            android:layout_height="500dp"
-            android:layout_marginTop="12dp"
-            app:layout_constraintBottom_toTopOf="@+id/btn_solve_quiz_mp"
-            app:layout_constraintTop_toBottomOf="@id/tv_myrank">
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingStart="10dp"
+            android:paddingTop="0dp"
+            android:paddingEnd="10dp"
+            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+            tools:context="M"
+            tools:listitem="@layout/list_item_rank" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_rank"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clipToPadding="false"
-                android:paddingStart="10dp"
-                android:paddingTop="0dp"
-                android:paddingEnd="10dp"
-                app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
-                tools:context="M"
-                tools:listitem="@layout/list_item_rank" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
-        </FrameLayout>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_bottom_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#F9F9F9"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <ImageButton
             android:id="@+id/btn_solve_quiz_mp"
@@ -84,5 +98,9 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@+id/btn_solve_quiz_mp"
             app:layout_constraintRight_toRightOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
