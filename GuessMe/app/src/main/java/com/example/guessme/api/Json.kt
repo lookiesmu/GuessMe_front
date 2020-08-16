@@ -20,6 +20,11 @@ class Json() {
         return jsonObject.toString()
     }
 
+    fun submitScore(score: String): String{
+        jsonObject.put("score",score)
+        return  jsonObject.toString()
+    }
+
     fun isJson(str : String):Boolean{
         str.trim()
         if(str[0] == '{' || str[0] == '[')

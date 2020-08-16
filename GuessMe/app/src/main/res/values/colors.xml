@@ -9,6 +9,7 @@
     <color name="colorNotActive">#eaeeec</color>
     <color name="colorNotActiveDark">#999999</color>
     <color name="colorMainBackground">#527394</color>
+    <color name="colorBackground">#F9F9F9</color>
 
 
 </resources>

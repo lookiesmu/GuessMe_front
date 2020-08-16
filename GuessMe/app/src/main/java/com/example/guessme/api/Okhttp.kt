@@ -3,7 +3,6 @@ package com.example.guessme.api
 
 import android.content.Context
 import android.util.Log
-import com.example.guessme.User_Control
 import okhttp3.*
 import java.io.IOException
 import java.util.concurrent.TimeUnit
@@ -50,17 +49,18 @@ class Okhttp() {
             val builder= Request.Builder()
                 .url(url)
                 .post(RequestBody.create(MediaType.parse("application/json"), jsonbody))
-                //.addHeader("X-AUTH-TOKEN", "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyNSIsInJvbGVzIjpbXSwiaWF0IjoxNTk3NDAzMjQ4LCJleHAiOjE1OTc0MDY4NDh9.orBPBxwKHonW-xq7Jn01l3-CpzXF7yvwvHpNh_TJknA")
+
             if(!token.isNullOrEmpty())
                 builder.header("X-AUTH-TOKEN",token!!)
+            Log.d("network","tok3: "+ token)
             val request = builder.build()
+            if(!request.header("X-AUTH-TOKEN").isNullOrEmpty())
+                User_Control(context!!)
+                    .set_token(request.header("X-AUTH-TOKEN").toString())
             response = client.newCall(request).execute()
             if(!response.header("X-AUTH-TOKEN").isNullOrEmpty())
                 User_Control(context!!)
                     .set_token(response.header("X-AUTH-TOKEN").toString())
-            Log.d("network", "postheader: "+ token)
-            //Log.d("network", "postusertoken: "+User_Control(context!!).set_token(response.header("X-AUTH-TOKEN").toString()))
-            Log.d("network", "postbody: "+jsonbody)
 
             return response.body()!!.string()
 

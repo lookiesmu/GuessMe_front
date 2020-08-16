@@ -13,8 +13,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.guessme.adapters.CreateQuizAdapter
 import com.example.guessme.api.Json
 import com.example.guessme.api.Okhttp
+import com.example.guessme.api.User_Control
 import com.example.guessme.data.Quiz
-import com.example.guessme.util.Constants.Companion.BASE_URL
+import com.example.guessme.util.Constants
 import kotlinx.android.synthetic.main.activity_create_quiz.*
 import org.json.JSONArray
 import org.json.JSONObject
@@ -22,6 +23,7 @@ import org.json.JSONObject
 class CreateQuizActivity : AppCompatActivity() {
 
     val createQuizList: ArrayList<Quiz> = arrayListOf()
+    val quiz_url = Constants.BASE_URL + "/quizzes"
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
@@ -48,15 +50,12 @@ class CreateQuizActivity : AppCompatActivity() {
     inner class CreateQuiz_Control {
         // 서버로부터 퀴즈 문항 get
         fun GET_CreateQuiz(){
-            //Log.d("CreateQuiz_Activity","2")
-            val url = getString(R.string.server_url)+"/quizzes"
-            asynctask().execute("0", url)
+            asynctask().execute("0", quiz_url)
 
         }
 
         // 퀴즈 생성 post
         fun POST_CreateQuiz(){
-            val url = getString(R.string.server_url) + "/quizzes"
             var jsonArr = JSONArray()
             for (i in 0 until createQuizList.size) {
                 val jsonObj = JSONObject()
@@ -69,7 +68,7 @@ class CreateQuizActivity : AppCompatActivity() {
                 jsonArr.put(jsonObj)
                 Log.d("postarr",jsonArr.toString())
             }
-            asynctask().execute("1", url, jsonArr.toString())
+            asynctask().execute("1", quiz_url, jsonArr.toString())
         }
 
         // 선택했는지 확인
@@ -107,7 +106,7 @@ class CreateQuizActivity : AppCompatActivity() {
     // 버튼 클릭 리스너
     fun CreateQuiz_Click_Listener(view : View){
         when(view.id){
-            R.id.btn_create_quiz -> {        // 퀴즈 생성 완료 버튼
+            R.id.cl_btn_create_quiz -> {        // 퀴즈 생성 완료 버튼
                 if (CreateQuiz_Control().select_check()) {
                     CreateQuiz_Control().POST_CreateQuiz()
 
@@ -142,7 +141,7 @@ class CreateQuizActivity : AppCompatActivity() {
                 1 -> {
                      var quizList = params[2]
 
-                    response = Okhttp().POST(url, Json()
+                    response = Okhttp(applicationContext).POST(url, Json()
                         .createQuiz(quizList))
                 }
             }

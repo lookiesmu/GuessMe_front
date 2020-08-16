@@ -11,10 +11,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.guessme.api.Json
 import com.example.guessme.api.Okhttp
-import com.example.guessme.data.Quiz
-import kotlinx.android.synthetic.main.activity_create_quiz.*
+import com.example.guessme.api.User_Control
 import kotlinx.android.synthetic.main.activity_search_quiz.*
-import org.json.JSONArray
 import org.json.JSONObject
 import java.lang.Exception
 
@@ -61,6 +59,7 @@ class SearchQuizActivity : AppCompatActivity() {
 
     inner class asynctask : AsyncTask<String, Void, String>(){
         var state: Int = -1 //state == 0 : GET_퀴즈찾기, state == 1 : GET_해당유저의퀴즈찾기
+
         override fun doInBackground(vararg params: String): String {
             state = Integer.parseInt(params[0])
             val url = params[1]
@@ -98,6 +97,7 @@ class SearchQuizActivity : AppCompatActivity() {
                     1 -> {
                         val intent = Intent(this@SearchQuizActivity, MypageActivity::class.java)
                         startActivity(intent)
+                        this@SearchQuizActivity.finish()
                     }
                 }
 
@@ -128,7 +128,9 @@ class SearchQuizActivity : AppCompatActivity() {
 
             R.id.btn_mypage ->{
 //                생성 이력이 있는 유저인지 제약해야 함
-                val username = User_Control(applicationContext).get_user().nickname
+                val username = User_Control(
+                    applicationContext
+                ).get_user().nickname
                 SearchQuiz_Control().GET_USER_QUIZ(username.toString())
             }
         }
@@ -147,6 +149,11 @@ class SearchQuizActivity : AppCompatActivity() {
     override fun onPause() {
         asynctask().cancel(true)
         super.onPause()
+    }
+
+    override fun onBackPressed() {
+        Log.d("finish","finish")
+        this@SearchQuizActivity.finish()
     }
 
 }
