@@ -110,10 +110,21 @@ class MypageActivity : AppCompatActivity() {
         fun SignOut() {
             val builder = AlertDialog.Builder(this@MypageActivity)
             builder.setTitle("로그아웃").setMessage("로그아웃 하시겠습니까?")
-            builder.setPositiveButton("로그아웃", { dialog, whichButton -> })
+            builder.setPositiveButton("로그아웃", { dialog, whichButton -> LogOut()})
             builder.setNegativeButton("취소", { dialog, whichButton -> })
             builder.show()
         }
+
+        fun LogOut() {
+            User_Control(applicationContext).signout()
+            val intent = Intent(this@MypageActivity,SignInActivity::class.java)
+            startActivity(intent)
+            finish()
+            Toast.makeText(applicationContext, "로그아웃하였습니다.", Toast.LENGTH_SHORT).show()
+        }
+
+
+
 
     }
 
