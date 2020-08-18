@@ -67,6 +67,7 @@ class MypageActivity : AppCompatActivity() {
             R.id.btn_delete_quiz -> {
                 Mypage_Control().DELETE_Quiz()
                 startActivity(Intent(applicationContext,CreateQuizActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP))
+                finish()
                 true
             }
             R.id.btn_signout ->{

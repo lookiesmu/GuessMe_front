@@ -106,12 +106,13 @@ class CreateQuizActivity : AppCompatActivity() {
     // 버튼 클릭 리스너
     fun CreateQuiz_Click_Listener(view : View){
         when(view.id){
-            R.id.cl_btn_create_quiz -> {        // 퀴즈 생성 완료 버튼
+            R.id.btn_create_quiz -> {        // 퀴즈 생성 완료 버튼
                 if (CreateQuiz_Control().select_check()) {
                     CreateQuiz_Control().POST_CreateQuiz()
 
                     val intent = Intent(this, SearchQuizActivity::class.java)
                     startActivity(intent)
+                    finish()
                 } else{
                     Toast.makeText(applicationContext,"모든 항목에 답변해주세요.",Toast.LENGTH_SHORT).show()
                 }
