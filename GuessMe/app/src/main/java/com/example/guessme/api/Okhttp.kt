@@ -36,7 +36,7 @@ class Okhttp() {
                 builder.header("X-AUTH-TOKEN",token!!)
             val request = builder.build()
             var response : Response = client.newCall(request).execute()
-            Log.d("networ", url)
+            Log.d("networ", token)
             return response.body()!!.string()
 
         }catch (e: IOException){
@@ -49,9 +49,7 @@ class Okhttp() {
             val builder= Request.Builder()
                 .url(url)
                 .post(RequestBody.create(MediaType.parse("application/json"), jsonbody))
-                .addHeader("Content-Type", "application/json")
-//                .addHeader("X-AUTH-TOKEN", "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzOSIsInJvbGVzIjpbXSwiaWF0IjoxNTk3NDAwNzgwLCJleHAiOjE1OTc0MDQzODB9.xYc_Va2R9gv5UOjNXcZTMyeVF4hkWDtbPek074LLoh4")
-            Log.d("network","tok2: "+ token)
+
             if(!token.isNullOrEmpty())
                 builder.header("X-AUTH-TOKEN",token!!)
             Log.d("network","tok3: "+ token)
@@ -63,7 +61,6 @@ class Okhttp() {
             if(!response.header("X-AUTH-TOKEN").isNullOrEmpty())
                 User_Control(context!!)
                     .set_token(response.header("X-AUTH-TOKEN").toString())
-            //token=response.header("X-AUTH-TOKEN").toString()
 
             return response.body()!!.string()
 

@@ -8,6 +8,10 @@
         android:id="@+id/btn_delete_quiz"
         android:title="퀴즈 삭제하기"
         app:showAsAction="withText" />
+    <item
+        android:id="@+id/btn_signout"
+        android:title="로그아웃"
+        app:showAsAction="withText"/>
 </menu>
 
 
