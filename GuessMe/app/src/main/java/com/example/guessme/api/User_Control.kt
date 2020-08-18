@@ -20,7 +20,9 @@ class User_Control(context: Context) {
     fun get_token(): String? {
         return sharedPreferences.getString("X-AUTH-TOKEN", null)
     }
-
+    fun signout(){
+        editPreferences.clear().apply()
+    }
     fun get_user(): User {
         var user = User(
             sharedPreferences.getString("nickname", "")
