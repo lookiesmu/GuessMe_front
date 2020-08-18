@@ -1,6 +1,8 @@
 package com.example.guessme
 
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
@@ -10,8 +12,8 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
-import androidx.appcompat.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.guessme.adapters.MyPageAdapter
@@ -20,9 +22,9 @@ import com.example.guessme.api.Okhttp
 import com.example.guessme.api.User_Control
 import com.example.guessme.data.Rank
 import com.example.guessme.util.Constants
-import kotlinx.android.synthetic.main.activity_create_quiz.*
 import kotlinx.android.synthetic.main.activity_mypage.*
 import org.json.JSONObject
+
 
 class MypageActivity : AppCompatActivity() {
 
@@ -68,6 +70,10 @@ class MypageActivity : AppCompatActivity() {
                 finish()
                 true
             }
+            R.id.btn_signout ->{
+                Mypage_Control().SignOut()
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -101,8 +107,27 @@ class MypageActivity : AppCompatActivity() {
         fun DELETE_Quiz(){
             asynctask().execute("1", quiz_url)
         }
+        fun SignOut() {
+            val builder = AlertDialog.Builder(this@MypageActivity)
+            builder.setTitle("로그아웃").setMessage("로그아웃 하시겠습니까?")
+            builder.setPositiveButton("로그아웃", { dialog, whichButton -> LogOut()})
+            builder.setNegativeButton("취소", { dialog, whichButton -> })
+            builder.show()
+        }
+
+        fun LogOut() {
+            User_Control(applicationContext).signout()
+            val intent = Intent(this@MypageActivity,SignInActivity::class.java)
+            startActivity(intent)
+            finish()
+            Toast.makeText(applicationContext, "로그아웃하였습니다.", Toast.LENGTH_SHORT).show()
+        }
+
+
+
 
     }
+
 
     // 버튼 클릭 리스너
     fun Mypage_Click_Listener(view : View){
