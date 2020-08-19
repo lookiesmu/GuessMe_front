@@ -6,25 +6,30 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_solve_quiz"
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="350dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:clipToPadding="false"
-        android:paddingStart="20dp"
-        android:paddingEnd="20dp"
-
-        app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintBottom_toTopOf="@id/ll_submit_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bg_top"
-        tools:context="M"
-        tools:listitem="@layout/list_item_solve_quiz" />
+        app:layout_constraintBottom_toTopOf="@id/ll_submit_btn"
+        app:layout_constraintTop_toBottomOf="@+id/bg_top">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_solve_quiz"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:clipToPadding="false"
+            android:layout_gravity="center"
+            android:paddingTop="10dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+            tools:context="M"
+            tools:listitem="@layout/list_item_solve_quiz" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/bg_top"
@@ -36,8 +41,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"></androidx.appcompat.widget.LinearLayoutCompat>
 
-
-    <!-- @{class.변수}/ 아래 있을 수록 우선순위 높음 -->
     <TextView
         android:id="@+id/tv_solve_quiz"
         android:layout_width="match_parent"
@@ -54,6 +57,8 @@
         app:layout_constraintVertical_bias="0.3"
         app:layout_constraintVertical_chainStyle="packed"></TextView>
 
+
+    <!-- @{class.변수}/ 아래 있을 수록 우선순위 높음 -->
     <TextView
         android:id="@+id/tv_description"
         android:layout_width="match_parent"
