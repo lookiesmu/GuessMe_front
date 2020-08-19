@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.guessme">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,21 +12,22 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".SignInActivity">
+        <activity android:name=".InitActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CreateQuizActivity"></activity>
-        <activity android:name=".MypageActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".SignInActivity">
         </activity>
-        <activity android:name=".SignUpActivity"></activity>
-        <activity android:name=".SolveQuizActivity"></activity>
-        <activity android:name=".SearchQuizActivity"></activity>
-        <activity android:name=".UpdateQuizActivity"></activity>
+        <activity android:name=".CreateQuizActivity" />
+        <activity
+            android:name=".MypageActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".SignUpActivity" />
+        <activity android:name=".SolveQuizActivity" />
+        <activity android:name=".SearchQuizActivity" />
     </application>
 
 </manifest>
