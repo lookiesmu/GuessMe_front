@@ -132,7 +132,7 @@ class MypageActivity : AppCompatActivity() {
     // 버튼 클릭 리스너
     fun Mypage_Click_Listener(view : View){
         when(view.id){
-            R.id.btn_solve_quiz_mp -> {        // 퀴즈 생성 완료 버튼
+            R.id.btn_solve_quiz_mp -> {        // 퀴즈 생성 완료 버튼"
                     val intent = Intent(this, SearchQuizActivity::class.java)
                     startActivity(intent)
                     finish()
