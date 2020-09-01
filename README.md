@@ -73,33 +73,33 @@
 
 👤유호준
 
-[@YouHojoon](https://github.com/YouHojoon))
+[@YouHojoon](https://github.com/YouHojoon)
 
 - 서버, DB 설계 및 구현
 
 👤박도원
 
-[@devdw98](https://github.com/devdw98))
+[@devdw98](https://github.com/devdw98)
 
 - 서버, DB 설계 및 구현
 
 👤천윤한
 
-[@CheonYoonHan](https://github.com/CheonYoonHan))
+[@CheonYoonHan](https://github.com/CheonYoonHan)
 
 - 안드로이드
 - UI 디자인 설계
 
 👤박희지
 
-[@HeegeePark](https://github.com/HeegeePark))
+[@HeegeePark](https://github.com/HeegeePark)
 
 - 안드로이드
 - UI 디자인 설계
 
 👤이정인
 
-[@jeongiin](https://github.com/jeongiin))
+[@jeongiin](https://github.com/jeongiin)
 
 - 안드로이드
 - UI 디자인 설계
