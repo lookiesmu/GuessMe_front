@@ -22,7 +22,7 @@
 - 친구와 공유하여 친구의 퀴즈도 풀어보기
 - 나의 퀴즈를 얼마나 잘 풀었는지 친구들의 랭킹 조회하기
 
-<img src="./README/README 25e4ea867a514153894d36fec5a290a3.png" width="33%" height="33%"/>  <img src="./README/README 25e4ea867a514153894d36fec5a290a3 1.png" width="33%" height="33%" /> <img src="./README/README 25e4ea867a514153894d36fec5a290a3 2.png" width="33%" height="33%" /> <img src="./README/README 25e4ea867a514153894d36fec5a290a3 3.png" width="33%" height="33%" /> <img src="./README/_.png" width="33%" height="33%" />
+<img src="./README/README 25e4ea867a514153894d36fec5a290a3.png" width="25%" height="25%"/>  <img src="./README/README 25e4ea867a514153894d36fec5a290a3 1.png" width="25%" height="25%" /> <img src="./README/README 25e4ea867a514153894d36fec5a290a3 2.png" width="25%" height="25%" /> <img src="./README/README 25e4ea867a514153894d36fec5a290a3 3.png" width="25%" height="25%" /> <img src="./README/_.png" width="25%" height="25%" />
 
 ### 주요 기능
 
