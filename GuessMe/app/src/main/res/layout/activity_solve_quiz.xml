@@ -7,6 +7,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_solve_quiz"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:clipToPadding="false"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+
+        app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintBottom_toTopOf="@id/ll_submit_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bg_top"
+        tools:context="M"
+        tools:listitem="@layout/list_item_solve_quiz" />
+
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/bg_top"
         android:layout_width="match_parent"
@@ -17,20 +36,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"></androidx.appcompat.widget.LinearLayoutCompat>
 
+
     <!-- @{class.변수}/ 아래 있을 수록 우선순위 높음 -->
     <TextView
         android:id="@+id/tv_solve_quiz"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.3"
-        app:layout_constraintBottom_toTopOf="@+id/tv_description"
-        app:layout_constraintVertical_chainStyle="packed"
-        android:text="이땡님 퀴즈를 풀어보세요!"
+        android:gravity="center"
+        android:text=""
         android:textColor="#FFFFFF"
         android:textSize="25dp"
-        android:gravity="center"
-        android:textStyle="bold"></TextView>
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tv_description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.3"
+        app:layout_constraintVertical_chainStyle="packed"></TextView>
 
     <TextView
         android:id="@+id/tv_description"
@@ -46,41 +68,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_solve_quiz"></TextView>
 
-    <ImageButton
-        android:id="@+id/btn_solve_quiz"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        android:clickable="true"
-        android:src="@drawable/btn_submit"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
-    <ScrollView
-        android:id="@+id/frameLayout_rv"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ll_submit_btn"
         android:layout_width="match_parent"
-        android:layout_height="350dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintBottom_toTopOf="@id/btn_solve_quiz"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorBackground"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bg_top">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_solve_quiz"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:clipToPadding="false"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
-            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
-            tools:listitem="@layout/list_item_solve_quiz"
-            tools:context="M"
-            />
-    </ScrollView>
+        <ImageButton
+            android:id="@+id/btn_solve_quiz"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:clickable="true"
+            android:src="@drawable/btn_submit"
+            android:onClick="SolveQuiz_Click_Listener"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

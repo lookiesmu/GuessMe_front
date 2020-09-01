@@ -3,7 +3,6 @@ package com.example.guessme.api
 
 import android.content.Context
 import android.util.Log
-import com.example.guessme.User_Control
 import okhttp3.*
 import java.io.IOException
 import java.util.concurrent.TimeUnit
@@ -37,7 +36,7 @@ class Okhttp() {
                 builder.header("X-AUTH-TOKEN",token!!)
             val request = builder.build()
             var response : Response = client.newCall(request).execute()
-            Log.d("networ", url)
+            Log.d("networ", token)
             return response.body()!!.string()
 
         }catch (e: IOException){
@@ -50,14 +49,19 @@ class Okhttp() {
             val builder= Request.Builder()
                 .url(url)
                 .post(RequestBody.create(MediaType.parse("application/json"), jsonbody))
+
             if(!token.isNullOrEmpty())
                 builder.header("X-AUTH-TOKEN",token!!)
+            Log.d("network","tok3: "+ token)
             val request = builder.build()
+            if(!request.header("X-AUTH-TOKEN").isNullOrEmpty())
+                User_Control(context!!)
+                    .set_token(request.header("X-AUTH-TOKEN").toString())
             response = client.newCall(request).execute()
             if(!response.header("X-AUTH-TOKEN").isNullOrEmpty())
                 User_Control(context!!)
                     .set_token(response.header("X-AUTH-TOKEN").toString())
-            Log.d("network", "network: "+response.header("X-AUTH-TOKEN"))
+
             return response.body()!!.string()
 
         }catch (e: IOException){
@@ -65,12 +69,14 @@ class Okhttp() {
         }
     }
 
-    fun DELETE(url: String, jsonbody: String):String{
+    fun DELETE(url: String/*, jsonbody: String*/):String{
         try {
             val builder= Request.Builder()
                 .url(url)
-                .delete(RequestBody.create(MediaType.parse("application/json"), jsonbody))
-            Log.d("Okhttp",jsonbody)
+//                .delete(RequestBody.create(MediaType.parse("application/json"), jsonbody))
+                .delete()
+
+            //Log.d("Okhttp",jsonbody)
             if(!token.isNullOrEmpty())
                 builder.header("X-AUTH-TOKEN",token!!)
 

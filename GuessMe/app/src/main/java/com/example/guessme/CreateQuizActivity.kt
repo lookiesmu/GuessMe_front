@@ -13,14 +13,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.guessme.adapters.CreateQuizAdapter
 import com.example.guessme.api.Json
 import com.example.guessme.api.Okhttp
+import com.example.guessme.api.User_Control
 import com.example.guessme.data.Quiz
-import com.example.guessme.util.Constants.Companion.BASE_URL
+import com.example.guessme.util.Constants
+import kotlinx.android.synthetic.main.activity_create_quiz.*
 import org.json.JSONArray
 import org.json.JSONObject
 
 class CreateQuizActivity : AppCompatActivity() {
 
     val createQuizList: ArrayList<Quiz> = arrayListOf()
+    val quiz_url = Constants.BASE_URL + "/quizzes"
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
@@ -30,7 +33,11 @@ class CreateQuizActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_quiz)
-        //Log.d("CreateQuiz_Activity","1")
+
+
+        // 닉네임 타이틀에 출력
+        val username = User_Control(applicationContext).get_user().nickname
+        tv_cq_title.setText(String.format("%s님의 퀴즈를 만들어 보세요!",username))
 
 
         CreateQuiz_Control().GET_CreateQuiz()
@@ -43,16 +50,25 @@ class CreateQuizActivity : AppCompatActivity() {
     inner class CreateQuiz_Control {
         // 서버로부터 퀴즈 문항 get
         fun GET_CreateQuiz(){
-            //Log.d("CreateQuiz_Activity","2")
-            val url = getString(R.string.server_url)+"/quizzes"
-            asynctask().execute("0", url)
+            asynctask().execute("0", quiz_url)
 
         }
 
-        // 퀴즈 생성
+        // 퀴즈 생성 post
         fun POST_CreateQuiz(){
-            val url = getString(R.string.server_url) + "/quizzes"
-            asynctask().execute("1", url, createQuizList.toString())
+            var jsonArr = JSONArray()
+            for (i in 0 until createQuizList.size) {
+                val jsonObj = JSONObject()
+                jsonObj.put("quizId",createQuizList[i].quizId)
+                jsonObj.put("content",createQuizList[i].content)
+                jsonObj.put("answer",createQuizList[i].answer)
+
+                Log.d("postobj",jsonObj.toString())
+
+                jsonArr.put(jsonObj)
+                Log.d("postarr",jsonArr.toString())
+            }
+            asynctask().execute("1", quiz_url, jsonArr.toString())
         }
 
         // 선택했는지 확인
@@ -62,6 +78,7 @@ class CreateQuizActivity : AppCompatActivity() {
                     return false
                 }
             }
+            Log.d("CreateQuiz_Activity","check = not null")
             return true
         }
 
@@ -95,6 +112,7 @@ class CreateQuizActivity : AppCompatActivity() {
 
                     val intent = Intent(this, SearchQuizActivity::class.java)
                     startActivity(intent)
+                    finish()
                 } else{
                     Toast.makeText(applicationContext,"모든 항목에 답변해주세요.",Toast.LENGTH_SHORT).show()
                 }
@@ -124,9 +142,8 @@ class CreateQuizActivity : AppCompatActivity() {
                 1 -> {
                      var quizList = params[2]
 
-                    response = Okhttp().POST(url, Json()
+                    response = Okhttp(applicationContext).POST(url, Json()
                         .createQuiz(quizList))
-
                 }
             }
             return response
@@ -144,7 +161,6 @@ class CreateQuizActivity : AppCompatActivity() {
                 return
             }
             //Log.d("CreateQuiz_Activity",response)
-
             val jsonObj = JSONObject(response)
             when (state) {
                 0 -> {
@@ -162,7 +178,13 @@ class CreateQuizActivity : AppCompatActivity() {
 
                 }
                 1 -> {
-                    Toast.makeText(applicationContext, "성공적으로 퀴즈를 생성했습니다!", Toast.LENGTH_SHORT).show()
+                    Log.d("CreateQuiz_Activity",response)
+                    if(response=="{}"){
+                        Toast.makeText(applicationContext, "성공적으로 퀴즈를 생성했습니다!", Toast.LENGTH_SHORT).show()
+                    } else{
+                        Toast.makeText(applicationContext, "퀴즈 생성에 실패했습니다.", Toast.LENGTH_SHORT).show()
+
+                    }
                 }
             }
         }

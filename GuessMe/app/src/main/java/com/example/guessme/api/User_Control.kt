@@ -1,4 +1,4 @@
-package com.example.guessme
+package com.example.guessme.api
 
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
@@ -9,7 +9,7 @@ class User_Control(context: Context) {
     val editPreferences = sharedPreferences.edit()
 
     fun set_token(token: String) {
-        editPreferences.putString("token", token).apply()
+        editPreferences.putString("X-AUTH-TOKEN", token).apply()
     }
 
     fun set_user(user: User) {
@@ -18,9 +18,11 @@ class User_Control(context: Context) {
     }
 
     fun get_token(): String? {
-        return sharedPreferences.getString("token", null)
+        return sharedPreferences.getString("X-AUTH-TOKEN", null)
     }
-
+    fun signout(){
+        editPreferences.clear().apply()
+    }
     fun get_user(): User {
         var user = User(
             sharedPreferences.getString("nickname", "")
