@@ -10,7 +10,7 @@
 
 ## 나를 맞춰봐 Guess Me
 
-<img src="/Users/heegeepark/Desktop/Repositories/GuessMe_front/README/ic_launcher.png" alt="ic_launcher" style="zoom: 25%;" />
+<img src="./README/ic_launcher.png" alt="ic_launcher" style="zoom: 25%;" />
 
 ---
 
@@ -22,7 +22,7 @@
 - 친구와 공유하여 친구의 퀴즈도 풀어보기
 - 나의 퀴즈를 얼마나 잘 풀었는지 친구들의 랭킹 조회하기
 
-<img src="/Users/heegeepark/Desktop/Repositories/GuessMe_front/README/README 25e4ea867a514153894d36fec5a290a3.png" alt="README 25e4ea867a514153894d36fec5a290a3" style="zoom: 33%;"/>  <img src="/Users/heegeepark/Desktop/Repositories/GuessMe_front/README/README 25e4ea867a514153894d36fec5a290a3 1.png" alt="README 25e4ea867a514153894d36fec5a290a3 1" style="zoom: 33%;" /> <img src="/Users/heegeepark/Desktop/Repositories/GuessMe_front/README/README 25e4ea867a514153894d36fec5a290a3 2.png" alt="README 25e4ea867a514153894d36fec5a290a3 2" style="zoom: 33%;" /> <img src="/Users/heegeepark/Desktop/Repositories/GuessMe_front/README/README 25e4ea867a514153894d36fec5a290a3 3.png" alt="README 25e4ea867a514153894d36fec5a290a3 3" style="zoom: 33%;" /> <img src="/Users/heegeepark/Desktop/Repositories/GuessMe_front/README/_.png" alt="_" style="zoom:33%;" />
+<img src="./README/README 25e4ea867a514153894d36fec5a290a3.png" alt="README 25e4ea867a514153894d36fec5a290a3" style="zoom: 33%;"/>  <img src="./README/README 25e4ea867a514153894d36fec5a290a3 1.png" alt="README 25e4ea867a514153894d36fec5a290a3 1" style="zoom: 33%;" /> <img src="./README/README 25e4ea867a514153894d36fec5a290a3 2.png" alt="README 25e4ea867a514153894d36fec5a290a3 2" style="zoom: 33%;" /> <img src="./README/README 25e4ea867a514153894d36fec5a290a3 3.png" alt="README 25e4ea867a514153894d36fec5a290a3 3" style="zoom: 33%;" /> <img src="./README/_.png" alt="_" style="zoom:33%;" />
 
 ### 주요 기능
 
@@ -73,33 +73,33 @@
 
 👤유호준
 
-[@YouHojoon]([https://github.com/YouHojoon](https://github.com/YouHojoon))
+[@YouHojoon](https://github.com/YouHojoon))
 
 - 서버, DB 설계 및 구현
 
 👤박도원
 
-[@devdw98]([https://github.com/devdw98](https://github.com/devdw98))
+[@devdw98](https://github.com/devdw98))
 
 - 서버, DB 설계 및 구현
 
 👤천윤한
 
-[@CheonYoonHan]([https://github.com/CheonYoonHan](https://github.com/CheonYoonHan))
+[@CheonYoonHan](https://github.com/CheonYoonHan))
 
 - 안드로이드
 - UI 디자인 설계
 
 👤박희지
 
-[@HeegeePark]([https://github.com/HeegeePark](https://github.com/HeegeePark))
+[@HeegeePark](https://github.com/HeegeePark))
 
 - 안드로이드
 - UI 디자인 설계
 
 👤이정인
 
-[@jeongiin]([https://github.com/jeongiin](https://github.com/jeongiin))
+[@jeongiin](https://github.com/jeongiin))
 
 - 안드로이드
 - UI 디자인 설계
