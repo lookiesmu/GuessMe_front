@@ -10,7 +10,7 @@
 
 ## 나를 맞춰봐 Guess Me
 
-<img src="./README/ic_launcher.png" alt="ic_launcher" style="zoom: 25%;" />
+<img src="./README/ic_launcher.png" alt="ic_launcher" width="25%", height="25%" />
 
 ---
 
@@ -22,7 +22,7 @@
 - 친구와 공유하여 친구의 퀴즈도 풀어보기
 - 나의 퀴즈를 얼마나 잘 풀었는지 친구들의 랭킹 조회하기
 
-<img src="./README/README 25e4ea867a514153894d36fec5a290a3.png" alt="README 25e4ea867a514153894d36fec5a290a3" style="zoom: 33%;"/>  <img src="./README/README 25e4ea867a514153894d36fec5a290a3 1.png" alt="README 25e4ea867a514153894d36fec5a290a3 1" style="zoom: 33%;" /> <img src="./README/README 25e4ea867a514153894d36fec5a290a3 2.png" alt="README 25e4ea867a514153894d36fec5a290a3 2" style="zoom: 33%;" /> <img src="./README/README 25e4ea867a514153894d36fec5a290a3 3.png" alt="README 25e4ea867a514153894d36fec5a290a3 3" style="zoom: 33%;" /> <img src="./README/_.png" alt="_" style="zoom:33%;" />
+<img src="./README/README 25e4ea867a514153894d36fec5a290a3.png" alt="README 25e4ea867a514153894d36fec5a290a3" style="zoom: 33%;"/>  <img src="./README/README 25e4ea867a514153894d36fec5a290a3 1.png" alt="README 25e4ea867a514153894d36fec5a290a3 1" width="33%", height="33%" /> <img src="./README/README 25e4ea867a514153894d36fec5a290a3 2.png" alt="README 25e4ea867a514153894d36fec5a290a3 2" width="33%", height="33%" /> <img src="./README/README 25e4ea867a514153894d36fec5a290a3 3.png" alt="README 25e4ea867a514153894d36fec5a290a3 3" width="33%", height="33%" /> <img src="./README/_.png" alt="_" width="33%", height="33%" />
 
 ### 주요 기능
 
