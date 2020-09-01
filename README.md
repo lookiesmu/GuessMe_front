@@ -6,8 +6,6 @@
 
 - 봄에는 할 일이 많기 때문에 비가 와도 일을 한다.
 
----
-
 ## 나를 맞춰봐 Guess Me
 
 <img src="./README/ic_launcher.png" width="25%" height="25%" />
