@@ -7,6 +7,7 @@
 - 봄에는 할 일이 많기 때문에 비가 와도 일을 한다.
 
 ## 나를 맞춰봐 Guess Me
+### 다운로드 :  https://play.google.com/store/apps/details?id=com.ilbi_guessme.guessme
 
 <img src="./README/ic_launcher.png" width="25%" height="25%" />
 
