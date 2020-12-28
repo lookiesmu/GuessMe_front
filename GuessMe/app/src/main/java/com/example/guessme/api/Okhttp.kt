@@ -36,7 +36,7 @@ class Okhttp() {
                 builder.header("X-AUTH-TOKEN",token!!)
             val request = builder.build()
             var response : Response = client.newCall(request).execute()
-            Log.d("networ", token)
+//            Log.e("networ", token)
             return response.body()!!.string()
 
         }catch (e: IOException){

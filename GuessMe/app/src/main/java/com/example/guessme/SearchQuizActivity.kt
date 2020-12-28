@@ -74,9 +74,9 @@ class SearchQuizActivity : AppCompatActivity() {
                 Log.d("Search_Activity", "null in")
                 return
             }
-            Log.d("Search_Activity",response)
+//            Log.d("Search_Activity",response)
             if(!Json().isJson(response)){
-                Log.d("퀴즈 입력 통신 에러", response)
+//                Log.d("퀴즈 입력 통신 에러", response)
                 Toast.makeText(applicationContext,"네트워크 통신 오류",Toast.LENGTH_SHORT).show()
                 return
             }
@@ -108,6 +108,7 @@ class SearchQuizActivity : AppCompatActivity() {
                         Toast.makeText(applicationContext, "퀴즈가 존재하지 않는 닉네임 입니다.", Toast.LENGTH_SHORT).show()
                     }
                     1 -> {
+                        // 저장된 퀴즈가 없는 회원인 경우 -> 퀴즈 생성 액티비티로 이동
                         val intent = Intent(this@SearchQuizActivity, CreateQuizActivity::class.java)
                         startActivity(intent)
                     }
