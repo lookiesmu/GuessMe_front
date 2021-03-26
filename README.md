@@ -43,7 +43,14 @@
 
 ### 백엔드
 
-- 스프링
+- 서버
+    - 언어: Java
+    - 사용기술 : Spring Boot, Json, JWT, JPA, Spring Security
+- 데이터베이스
+    - MySQL
+- 배포
+    - AWS EC2 , RDS
+    - Jenkins
 
 ### 프론트엔드
 
